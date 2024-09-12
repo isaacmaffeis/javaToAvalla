@@ -14,12 +14,12 @@ import java.nio.file.Paths;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.javaToAvalla.antlr.StepFunctionSupportLexer;
-import org.javaToAvalla.antlr.StepFunctionSupportParser;
+import org.javaToAvalla.antlr.StepFunctionArgsLexer;
+import org.javaToAvalla.antlr.StepFunctionArgsParser;
 import org.javaToAvalla.stepFunctionSupport.model.Argument;
 import org.junit.Test;
 
-public class StepFunctionSupportTest {
+public class StepFunctionArgsTest {
 
   @Test
   public void whenStepFunctionSupportContainsArguments_thenListOfArgumentsIsReturned(){
@@ -29,11 +29,11 @@ public class StepFunctionSupportTest {
     "RegistroDiCassa.SelezioneTipoDiPizza sceltaDelTipoPizza,\n" +
     "int insertQuantita,\n" +
     "int insertPrezzo" ;
-    StepFunctionSupportLexer stepFunctionSupportLexer = new StepFunctionSupportLexer(CharStreams.fromString(stepFunctionArguments));
-    CommonTokenStream tokens = new CommonTokenStream( stepFunctionSupportLexer );
-    StepFunctionSupportParser stepFunctionSupportParser = new StepFunctionSupportParser(tokens);
+    StepFunctionArgsLexer stepFunctionArgsLexer = new StepFunctionArgsLexer(CharStreams.fromString(stepFunctionArguments));
+    CommonTokenStream tokens = new CommonTokenStream( stepFunctionArgsLexer );
+    StepFunctionArgsParser stepFunctionSupportParser = new StepFunctionArgsParser(tokens);
     ParseTreeWalker walker = new ParseTreeWalker();
-    StepFunctionSupportListener stepFunctionSupportWalker = new StepFunctionSupportListener();
+    StepFunctionArgsListener stepFunctionSupportWalker = new StepFunctionArgsListener();
     walker.walk(stepFunctionSupportWalker, stepFunctionSupportParser.argumentList());
 
     assertThat(stepFunctionSupportWalker.getArgumentList().size(), is(6));
@@ -85,11 +85,11 @@ public class StepFunctionSupportTest {
 
     assertNotNull(content);
 
-    StepFunctionSupportLexer stepFunctionSupportLexer = new StepFunctionSupportLexer(CharStreams.fromString(content));
+    StepFunctionArgsLexer stepFunctionSupportLexer = new StepFunctionArgsLexer(CharStreams.fromString(content));
     CommonTokenStream tokens = new CommonTokenStream( stepFunctionSupportLexer );
-    StepFunctionSupportParser stepFunctionSupportParser = new StepFunctionSupportParser(tokens);
+    StepFunctionArgsParser stepFunctionSupportParser = new StepFunctionArgsParser(tokens);
     ParseTreeWalker walker = new ParseTreeWalker();
-    StepFunctionSupportListener stepFunctionSupportWalker = new StepFunctionSupportListener();
+    StepFunctionArgsListener stepFunctionSupportWalker = new StepFunctionArgsListener();
     walker.walk(stepFunctionSupportWalker, stepFunctionSupportParser.argumentList());
 
     assertFalse(stepFunctionSupportWalker.getArgumentList().isEmpty());

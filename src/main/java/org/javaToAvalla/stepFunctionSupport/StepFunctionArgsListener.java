@@ -3,22 +3,22 @@ package org.javaToAvalla.stepFunctionSupport;
 import java.util.ArrayList;
 import java.util.List;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import org.javaToAvalla.antlr.StepFunctionSupportBaseListener;
-import org.javaToAvalla.antlr.StepFunctionSupportParser.ArgumentContext;
-import org.javaToAvalla.antlr.StepFunctionSupportParser.NameContext;
-import org.javaToAvalla.antlr.StepFunctionSupportParser.TypeContext;
+import org.javaToAvalla.antlr.StepFunctionArgsBaseListener;
+import org.javaToAvalla.antlr.StepFunctionArgsParser.ArgumentContext;
+import org.javaToAvalla.antlr.StepFunctionArgsParser.NameContext;
+import org.javaToAvalla.antlr.StepFunctionArgsParser.TypeContext;
 import org.javaToAvalla.stepFunctionSupport.model.Argument;
 
 /**
  *
  */
-public class StepFunctionSupportListener extends StepFunctionSupportBaseListener {
+public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
 
   private final List<Argument> argumentList;
 
   private Argument currentArgument;
 
-  public StepFunctionSupportListener() {
+  public StepFunctionArgsListener() {
     this.argumentList = new ArrayList<>();
   }
 

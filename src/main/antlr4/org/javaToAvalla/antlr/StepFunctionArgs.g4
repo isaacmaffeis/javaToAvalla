@@ -1,4 +1,4 @@
-grammar StepFunctionSupport;
+grammar StepFunctionArgs;
 
 /*
  * Parser Rules

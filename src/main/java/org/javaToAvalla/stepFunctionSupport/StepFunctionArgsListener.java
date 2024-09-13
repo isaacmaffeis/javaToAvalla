@@ -7,7 +7,7 @@ import org.javaToAvalla.antlr.StepFunctionArgsBaseListener;
 import org.javaToAvalla.antlr.StepFunctionArgsParser.ArgumentContext;
 import org.javaToAvalla.antlr.StepFunctionArgsParser.NameContext;
 import org.javaToAvalla.antlr.StepFunctionArgsParser.TypeContext;
-import org.javaToAvalla.stepFunctionSupport.model.Argument;
+import org.javaToAvalla.model.Argument;
 
 /**
  *
@@ -25,7 +25,7 @@ public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
   /**
    * {@inheritDoc}
    *
-   * <p>The default implementation does nothing.</p>
+   * <p>Create a new empty Argument.</p>
    *
    * @param ctx
    */

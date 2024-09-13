@@ -16,7 +16,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.javaToAvalla.antlr.StepFunctionArgsLexer;
 import org.javaToAvalla.antlr.StepFunctionArgsParser;
-import org.javaToAvalla.stepFunctionSupport.model.Argument;
+import org.javaToAvalla.model.Argument;
 import org.junit.Test;
 
 public class StepFunctionArgsTest {

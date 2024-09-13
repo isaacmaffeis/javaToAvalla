@@ -21,7 +21,19 @@ asmDeclaration
     ;
 
 variableDeclaration
-    : Identifier ID EQ Identifier SEMI
+    : variableType variableName EQ variableValue SEMI
+    ;
+
+variableType
+    : Identifier
+    ;
+
+variableName
+    : ID
+    ;
+
+variableValue
+    : Identifier
     ;
 
 assertEquals

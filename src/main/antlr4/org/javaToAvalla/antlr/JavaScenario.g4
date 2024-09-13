@@ -5,7 +5,7 @@ grammar JavaScenario;
  */
 
 start
-    : (.)*? test EOF
+    : ClassDeclaration test EOF
     ;
 
 test
@@ -13,7 +13,7 @@ test
     ;
 
 scenario
-    :  (.)*? asmDeclaration (.)*? (variableDeclaration | (.))* RCURLY
+    :  (.)*? asmDeclaration (.)*? (variableDeclaration| stepFunction| assertEquals | (.))* RCURLY
     ;
 
 asmDeclaration
@@ -21,7 +21,27 @@ asmDeclaration
     ;
 
 variableDeclaration
-    : ID (DOT ID)+ ID EQ ID (DOT ID)+ SEMI
+    : Identifier ID EQ Identifier SEMI
+    ;
+
+assertEquals
+    : ASSERT_EQUALS LPAREN actual COMMA expected RPAREN SEMI
+    ;
+
+actual
+    : (Identifier | INT+ | STRING)
+    ;
+
+expected
+    : Getter
+    ;
+
+stepFunction
+    : StepFunc LPAREN argument? (COMMA argument)* RPAREN SEMI
+    ;
+
+argument
+    : (ID | STRING | INT+)
     ;
 
 /*
@@ -36,12 +56,32 @@ fragment ESC_SEQ
     : '\\' [btnfr"'\\]
     ;
 
+COMMENT
+    : '/*' .*? '*/' -> skip
+    ;
+
+ClassDeclaration
+    : 'package' (.)*? LCURLY
+    ;
+
 TestAnnotation
     : '@Test' LPAREN (.)*? RPAREN
     ;
 
 TestDeclaration
     : 'public' (.)*? LCURLY
+    ;
+
+StepFunc
+    : ID DOT STEP
+    ;
+
+Getter
+    : ID DOT GET ID LPAREN RPAREN
+    ;
+
+Identifier
+    : ID (DOT ID)+
     ;
 
 STRING
@@ -52,8 +92,8 @@ ASMID
     : [a-zA-Z_][a-zA-Z_0-9]*[_ASM]
     ;
 
-COMMENT
-    : '/*' .*? '*/' -> skip
+ASSERT_EQUALS
+    : 'assertEquals'
     ;
 
 AND : 'and' ;
@@ -72,6 +112,8 @@ START : '*' ;
 AT : '@' ;
 DOUBLE_QUOTES : '"' ;
 NEW : 'new' ;
+STEP : 'step' ;
+GET : 'get_' ;
 
 INT : [0-9]+ ;
 ID: [a-zA-Z_][a-zA-Z_0-9]* ;

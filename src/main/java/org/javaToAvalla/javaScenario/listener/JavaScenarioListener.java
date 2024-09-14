@@ -2,6 +2,7 @@ package org.javaToAvalla.javaScenario.listener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.javaToAvalla.antlr.JavaScenarioBaseListener;
@@ -28,25 +29,21 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   private final List<JavaArgumentTerm> stepFunctionArgsList;
 
-  private String asmName;
-
-  private int scenarioIndex;
-
-  private int currentIndex;
-
-  private JavaArgumentTerm currentJavaArgumentTerm;
+  private final List<Scenario> scenarioList;
 
   private Map<String, JavaVariableTerm> variablesList;
 
   private List<JavaVariableTerm> currentVariablesList;
 
-  private JavaVariableTerm currentJavaVariable;
-
   private final ScenarioManagerIF scenarioManagerIF;
 
-  private Scenario currenteScenario;
+  private int scenarioIndex;
 
-  private List<Scenario> scenarioList;
+  private int argumentIndex;
+
+  private JavaVariableTerm currentJavaVariable;
+
+  private Scenario currenteScenario;
 
   private JavaAssertionTerm currentJavaAssertionTerm;
 
@@ -54,6 +51,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   public JavaScenarioListener(List<JavaArgumentTerm> stepFunctionArgsList) {
     this.stepFunctionArgsList = stepFunctionArgsList;
     this.scenarioManagerIF = new ScenarioManager();
+    this.scenarioList = new LinkedList<>();
   }
 
   /**
@@ -77,9 +75,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterAsmDeclaration(AsmDeclarationContext ctx) {
-    this.asmName = ctx.ASMID(0).getText();
-    this.scenarioManagerIF.setHeaderTerm(this.currenteScenario, this.asmName, this.scenarioIndex);
-    this.scenarioManagerIF.setLoadTerm(this.currenteScenario, this.asmName);
+    String asmName = ctx.ASMID(0).getText();
+    this.scenarioManagerIF.setHeaderTerm(this.currenteScenario, asmName, this.scenarioIndex);
+    this.scenarioManagerIF.setLoadTerm(this.currenteScenario, asmName);
   }
 
   /**
@@ -166,7 +164,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void enterStepFunction(StepFunctionContext ctx) {
     this.currentVariablesList = new ArrayList<>();
-    this.currentIndex = 0;
+    this.argumentIndex = 0;
   }
 
   /**
@@ -179,7 +177,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void enterArgument(ArgumentContext ctx) {
 
-    this.currentJavaArgumentTerm = stepFunctionArgsList.get(currentIndex);
+    JavaArgumentTerm currentJavaArgumentTerm = stepFunctionArgsList.get(argumentIndex);
     this.currentJavaVariable = new JavaVariableTerm();
 
     if(currentJavaArgumentTerm.isPrimitive()){
@@ -194,7 +192,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
     this.currentVariablesList.add(currentJavaVariable);
 
-    this.currentIndex += 1;
+    this.argumentIndex += 1;
   }
 
   /**
@@ -208,30 +206,6 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   public void exitStepFunction(StepFunctionContext ctx) {
     this.scenarioManagerIF.setSetTerm(this.currenteScenario,this.currentVariablesList);
     this.scenarioManagerIF.setStepTerm(this.currenteScenario);
-  }
-
-  public List<JavaArgumentTerm> getStepFunctionArgsList() {
-    return stepFunctionArgsList;
-  }
-
-  public int getCurrentIndex() {
-    return currentIndex;
-  }
-
-  public JavaArgumentTerm getCurrentArgument() {
-    return currentJavaArgumentTerm;
-  }
-
-  public Map<String, JavaVariableTerm> getVariablesList() {
-    return variablesList;
-  }
-
-  public List<JavaVariableTerm> getCurrentVariablesList() {
-    return currentVariablesList;
-  }
-
-  public JavaVariableTerm getCurrentVariable() {
-    return currentJavaVariable;
   }
 
   /**
@@ -281,5 +255,25 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void exitAssertEquals(AssertEqualsContext ctx) {
     this.scenarioManagerIF.setCheckTerm(this.currenteScenario,this.currentJavaAssertionTerm);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   *
+   * @param ctx
+   */
+  @Override
+  public void exitScenario(ScenarioContext ctx) {
+    this.scenarioList.add(this.currenteScenario);
+  }
+
+  /**
+   *
+   * @return
+   */
+  public List<Scenario> getScenarioList() {
+    return scenarioList;
   }
 }

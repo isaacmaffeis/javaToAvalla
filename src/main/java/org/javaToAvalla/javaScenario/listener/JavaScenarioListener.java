@@ -1,4 +1,4 @@
-package org.javaToAvalla.javaScenario;
+package org.javaToAvalla.javaScenario.listener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +12,8 @@ import org.javaToAvalla.antlr.JavaScenarioParser.VariableDeclarationContext;
 import org.javaToAvalla.antlr.JavaScenarioParser.VariableNameContext;
 import org.javaToAvalla.antlr.JavaScenarioParser.VariableTypeContext;
 import org.javaToAvalla.antlr.JavaScenarioParser.VariableValueContext;
+import org.javaToAvalla.javaScenario.TermManagerIF;
+import org.javaToAvalla.javaScenario.impl.ScenarioManager;
 import org.javaToAvalla.model.Argument;
 import org.javaToAvalla.model.Variable;
 
@@ -28,6 +30,8 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   private List<Variable> currentVariablesList;
 
   private Variable currentVariable;
+
+  private TermManagerIF termManagerIF;
 
   public JavaScenarioListener(List<Argument> stepFunctionArgsList) {
     this.stepFunctionArgsList = stepFunctionArgsList;
@@ -67,6 +71,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void enterScenario(ScenarioContext ctx) {
     this.variablesList = new HashMap<>();
+    this.termManagerIF = new ScenarioManager();
   }
 
   /**
@@ -180,7 +185,8 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void exitStepFunction(StepFunctionContext ctx) {
-    //return this.currentVariablesList;
+    this.termManagerIF.setSetTerm(this.currentVariablesList);
+    this.termManagerIF.setStepTerm();
   }
 
 

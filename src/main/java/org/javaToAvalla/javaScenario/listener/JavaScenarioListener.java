@@ -6,20 +6,26 @@ import java.util.List;
 import java.util.Map;
 import org.javaToAvalla.antlr.JavaScenarioBaseListener;
 import org.javaToAvalla.antlr.JavaScenarioParser.ArgumentContext;
+import org.javaToAvalla.antlr.JavaScenarioParser.AsmDeclarationContext;
 import org.javaToAvalla.antlr.JavaScenarioParser.ScenarioContext;
 import org.javaToAvalla.antlr.JavaScenarioParser.StepFunctionContext;
 import org.javaToAvalla.antlr.JavaScenarioParser.VariableDeclarationContext;
 import org.javaToAvalla.antlr.JavaScenarioParser.VariableNameContext;
 import org.javaToAvalla.antlr.JavaScenarioParser.VariableTypeContext;
 import org.javaToAvalla.antlr.JavaScenarioParser.VariableValueContext;
-import org.javaToAvalla.javaScenario.TermManagerIF;
+import org.javaToAvalla.javaScenario.ScenarioManagerIF;
 import org.javaToAvalla.javaScenario.impl.ScenarioManager;
 import org.javaToAvalla.model.Argument;
+import org.javaToAvalla.model.Scenario;
 import org.javaToAvalla.model.Variable;
 
 public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   private final List<Argument> stepFunctionArgsList;
+
+  private String asmName;
+
+  private int scenarioIndex;
 
   private int currentIndex;
 
@@ -31,34 +37,33 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   private Variable currentVariable;
 
-  private TermManagerIF termManagerIF;
+  private final ScenarioManagerIF scenarioManagerIF;
+
+  private Scenario currenteScenario;
+
+  private List<Scenario> scenarioList;
+
 
   public JavaScenarioListener(List<Argument> stepFunctionArgsList) {
     this.stepFunctionArgsList = stepFunctionArgsList;
+    this.scenarioManagerIF = new ScenarioManager();
+    this.scenarioIndex = 0;
+
+
   }
 
-  public List<Argument> getStepFunctionArgsList() {
-    return stepFunctionArgsList;
-  }
 
-  public int getCurrentIndex() {
-    return currentIndex;
-  }
 
-  public Argument getCurrentArgument() {
-    return currentArgument;
-  }
-
-  public Map<String, Variable> getVariablesList() {
-    return variablesList;
-  }
-
-  public List<Variable> getCurrentVariablesList() {
-    return currentVariablesList;
-  }
-
-  public Variable getCurrentVariable() {
-    return currentVariable;
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   *
+   * @param ctx
+   */
+  @Override
+  public void enterAsmDeclaration(AsmDeclarationContext ctx) {
+    this.asmName = ctx.ASMID(0).getText();
   }
 
   /**
@@ -71,7 +76,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void enterScenario(ScenarioContext ctx) {
     this.variablesList = new HashMap<>();
-    this.termManagerIF = new ScenarioManager();
+    this.currenteScenario = new Scenario();
+    this.scenarioManagerIF.setHeader();
+    this.scenarioManagerIF.setLoad();
   }
 
   /**
@@ -185,8 +192,32 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void exitStepFunction(StepFunctionContext ctx) {
-    this.termManagerIF.setSetTerm(this.currentVariablesList);
-    this.termManagerIF.setStepTerm();
+    this.scenarioManagerIF.setSetTerm(this.currenteScenario,this.currentVariablesList);
+    this.scenarioManagerIF.setStepTerm(this.currenteScenario);
+  }
+
+  public List<Argument> getStepFunctionArgsList() {
+    return stepFunctionArgsList;
+  }
+
+  public int getCurrentIndex() {
+    return currentIndex;
+  }
+
+  public Argument getCurrentArgument() {
+    return currentArgument;
+  }
+
+  public Map<String, Variable> getVariablesList() {
+    return variablesList;
+  }
+
+  public List<Variable> getCurrentVariablesList() {
+    return currentVariablesList;
+  }
+
+  public Variable getCurrentVariable() {
+    return currentVariable;
   }
 
 

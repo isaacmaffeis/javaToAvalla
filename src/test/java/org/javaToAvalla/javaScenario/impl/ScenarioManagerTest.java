@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.Queue;
 import org.javaToAvalla.model.AvallaTerm;
+import org.javaToAvalla.model.Scenario;
 import org.javaToAvalla.model.SetTerm;
 import org.javaToAvalla.model.StepTerm;
 import org.javaToAvalla.model.Variable;
@@ -20,8 +21,9 @@ public class ScenarioManagerTest {
   public void whenSetSetTerm_SetTermIsCreatedAndAddedToQueue(){
     List<Variable> variableList = VariableUtil.getVariableList();
     ScenarioManager scenarioManager = new ScenarioManager();
-    scenarioManager.setSetTerm(variableList);
-    Queue<AvallaTerm> setTermList = scenarioManager.getAvallaScenario();
+    Scenario scenario = new Scenario();
+    scenarioManager.setSetTerm(scenario,variableList);
+    Queue<AvallaTerm> setTermList = scenario.getScenario();
 
     assertFalse(setTermList.isEmpty());
 
@@ -59,8 +61,9 @@ public class ScenarioManagerTest {
   @Test
   public void whenSetStepTerm_SetTermIsCreatedAndAddedToQueue(){
     ScenarioManager scenarioManager = new ScenarioManager();
-    scenarioManager.setStepTerm();
-    Queue<AvallaTerm> setTermList = scenarioManager.getAvallaScenario();
+    Scenario scenario = new Scenario();
+    scenarioManager.setStepTerm(scenario);
+    Queue<AvallaTerm> setTermList = scenario.getScenario();
 
     AvallaTerm avallaTerm = setTermList.remove();
     assertTrue(avallaTerm instanceof StepTerm);

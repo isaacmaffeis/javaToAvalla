@@ -1,32 +1,43 @@
 package org.javaToAvalla.javaScenario.impl;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import org.javaToAvalla.javaScenario.TermManagerIF;
-import org.javaToAvalla.model.AvallaTerm;
+import org.javaToAvalla.javaScenario.ScenarioManagerIF;
+import org.javaToAvalla.model.Scenario;
 import org.javaToAvalla.model.SetTerm;
 import org.javaToAvalla.model.StepTerm;
 import org.javaToAvalla.model.Variable;
 
-public class ScenarioManager implements TermManagerIF {
-
-  private final Queue<AvallaTerm> avallaScenario;
+public class ScenarioManager implements ScenarioManagerIF {
 
   public ScenarioManager() {
-    this.avallaScenario = new LinkedList<>();
   }
-  
+
+  /**
+   *
+   */
+  @Override
+  public void setHeader() {
+
+  }
+
+  /**
+   *
+   */
+  @Override
+  public void setLoad() {
+
+  }
+
   /**
    * @param variablesList
    */
   @Override
-  public void setSetTerm(List<Variable> variablesList) {
+  public void setSetTerm(Scenario avallaScenario, List<Variable> variablesList) {
     for(Variable variable: variablesList){
       String name = variable.getName();
       String value = retrieveValue(variable);
       SetTerm setTerm = new SetTerm(name, value);
-      this.avallaScenario.add(setTerm);
+      avallaScenario.getScenario().add(setTerm);
     }
   }
 
@@ -34,21 +45,17 @@ public class ScenarioManager implements TermManagerIF {
    *
    */
   @Override
-  public void setStepTerm() {
+  public void setStepTerm(Scenario avallaScenario) {
     StepTerm stepTerm = new StepTerm();
-    this.avallaScenario.add(stepTerm);
+    avallaScenario.getScenario().add(stepTerm);
   }
 
   /**
    * @param assertEquals
    */
   @Override
-  public void setCheckTerm(Object assertEquals) {
+  public void setCheckTerm(Scenario avallaScenario, Object assertEquals) {
 
-  }
-
-  public Queue<AvallaTerm> getAvallaScenario() {
-    return avallaScenario;
   }
 
   private String retrieveValue(Variable variable){

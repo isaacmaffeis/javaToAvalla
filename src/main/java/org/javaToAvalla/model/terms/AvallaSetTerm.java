@@ -1,6 +1,6 @@
-package org.javaToAvalla.model;
+package org.javaToAvalla.model.terms;
 
-public class SetTerm extends AvallaTerm {
+public class AvallaSetTerm extends AvallaTerm {
 
   /**
    * The name of the Set term.
@@ -16,7 +16,7 @@ public class SetTerm extends AvallaTerm {
    * Default constructor for the {@code SetTerm} class.
    * Initializes an empty Avala Term.
    */
-  public SetTerm() {
+  public AvallaSetTerm() {
   }
 
   /**
@@ -26,7 +26,7 @@ public class SetTerm extends AvallaTerm {
    * @param name The name of the Set term.
    * @param value The value of the Set Term.
    */
-  public SetTerm(String name, String value) {
+  public AvallaSetTerm(String name, String value) {
     this.name = name;
     this.value = value;
   }

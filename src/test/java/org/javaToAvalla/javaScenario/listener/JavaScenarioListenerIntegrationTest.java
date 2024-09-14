@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.javaToAvalla.antlr.JavaScenarioLexer;
 import org.javaToAvalla.antlr.JavaScenarioParser;
-import org.javaToAvalla.model.Argument;
+import org.javaToAvalla.model.terms.JavaArgumentTerm;
 import org.javaToAvalla.util.JavaScenarioUtil;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class JavaScenarioListenerIntegrationTest {
   public void whenParsingScenario_thenListOfAvallaTermIsReturned() {
 
     String javaFile = JavaScenarioUtil.getJavaFile_RegistroDiCassa();
-    List<Argument> stepFunctionArgsList = JavaScenarioUtil.getArgumentList_RegistroDiCassa();
+    List<JavaArgumentTerm> stepFunctionArgsList = JavaScenarioUtil.getArgumentList_RegistroDiCassa();
 
     JavaScenarioLexer javaScenarioLexer = new JavaScenarioLexer(CharStreams.fromString(javaFile));
     CommonTokenStream tokens = new CommonTokenStream(javaScenarioLexer);

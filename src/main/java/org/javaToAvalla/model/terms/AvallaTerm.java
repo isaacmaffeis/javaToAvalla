@@ -1,4 +1,4 @@
-package org.javaToAvalla.model;
+package org.javaToAvalla.model.terms;
 
 public class AvallaTerm extends Term{
 

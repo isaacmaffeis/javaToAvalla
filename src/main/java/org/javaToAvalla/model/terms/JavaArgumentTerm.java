@@ -1,10 +1,15 @@
-package org.javaToAvalla.model;
+package org.javaToAvalla.model.terms;
 
 /**
  * The {@code Argument} class represents a function argument with a type, name,
  * and an indicator of whether it is a primitive type or not.
  */
-public class Argument extends JavaTerm {
+public class JavaArgumentTerm extends JavaTerm {
+
+  /**
+   * The name of the Argument.
+   */
+  private String name;
 
   /**
    * Flag indicating whether the argument is of a primitive type:
@@ -19,7 +24,16 @@ public class Argument extends JavaTerm {
    * Default constructor for the {@code Argument} class.
    * Initializes an empty argument.
    */
-  public Argument() {
+  public JavaArgumentTerm() {
+  }
+
+  /**
+   * Sets the name of the Argument.
+   *
+   * @param name the name of the argument.
+   */
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**
@@ -29,6 +43,15 @@ public class Argument extends JavaTerm {
    */
   public void setPrimitive(boolean primitive) {
     isPrimitive = primitive;
+  }
+
+  /**
+   * Returns the name of the argument.
+   *
+   * @return the argument's name as a {@code String}.
+   */
+  public String getName() {
+    return name;
   }
 
   /**

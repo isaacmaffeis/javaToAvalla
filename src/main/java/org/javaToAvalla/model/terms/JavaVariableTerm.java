@@ -1,9 +1,9 @@
-package org.javaToAvalla.model;
+package org.javaToAvalla.model.terms;
 
 /**
  *
  */
-public class Variable extends Argument {
+public class JavaVariableTerm extends JavaArgumentTerm {
 
   /**
    * The value of the variable.
@@ -14,7 +14,7 @@ public class Variable extends Argument {
    * Default constructor for the {@code Variable} class.
    * Initializes an empty variable.
    */
-  public Variable() {
+  public JavaVariableTerm() {
   }
 
   /**

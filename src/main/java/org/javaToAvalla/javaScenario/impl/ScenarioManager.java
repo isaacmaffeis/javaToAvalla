@@ -2,10 +2,14 @@ package org.javaToAvalla.javaScenario.impl;
 
 import java.util.List;
 import org.javaToAvalla.javaScenario.ScenarioManagerIF;
+import org.javaToAvalla.model.terms.AvallaCheckTerm;
+import org.javaToAvalla.model.terms.AvallaHeaderTerm;
+import org.javaToAvalla.model.terms.AvallaLoadTerm;
 import org.javaToAvalla.model.Scenario;
-import org.javaToAvalla.model.SetTerm;
-import org.javaToAvalla.model.StepTerm;
-import org.javaToAvalla.model.Variable;
+import org.javaToAvalla.model.terms.AvallaSetTerm;
+import org.javaToAvalla.model.terms.AvallaStepTerm;
+import org.javaToAvalla.model.terms.JavaAssertionTerm;
+import org.javaToAvalla.model.terms.JavaVariableTerm;
 
 public class ScenarioManager implements ScenarioManagerIF {
 
@@ -16,28 +20,32 @@ public class ScenarioManager implements ScenarioManagerIF {
    *
    */
   @Override
-  public void setHeader() {
-
+  public void setHeaderTerm(Scenario avallaScenario, String asmName, int scenarioIndex) {
+    AvallaHeaderTerm avallaHeaderTerm = new AvallaHeaderTerm();
+    avallaHeaderTerm.setScenarioName(retrieveAsmName(asmName) + "_" + scenarioIndex);
+    avallaScenario.add(avallaHeaderTerm);
   }
 
   /**
    *
    */
   @Override
-  public void setLoad() {
-
+  public void setLoadTerm(Scenario avallaScenario, String asmName) {
+    AvallaLoadTerm avallaLoadTerm = new AvallaLoadTerm();
+    avallaLoadTerm.setLoad(retrieveAsmName(asmName));
+    avallaScenario.add(avallaLoadTerm);
   }
 
   /**
    * @param variablesList
    */
   @Override
-  public void setSetTerm(Scenario avallaScenario, List<Variable> variablesList) {
-    for(Variable variable: variablesList){
-      String name = variable.getName();
-      String value = retrieveValue(variable);
-      SetTerm setTerm = new SetTerm(name, value);
-      avallaScenario.getScenario().add(setTerm);
+  public void setSetTerm(Scenario avallaScenario, List<JavaVariableTerm> variablesList) {
+    for(JavaVariableTerm javaVariable : variablesList){
+      String name = javaVariable.getName();
+      String value = retrieveValue(javaVariable);
+      AvallaSetTerm avallaSetTerm = new AvallaSetTerm(name, value);
+      avallaScenario.add(avallaSetTerm);
     }
   }
 
@@ -46,23 +54,41 @@ public class ScenarioManager implements ScenarioManagerIF {
    */
   @Override
   public void setStepTerm(Scenario avallaScenario) {
-    StepTerm stepTerm = new StepTerm();
-    avallaScenario.getScenario().add(stepTerm);
+    AvallaStepTerm avallaStepTerm = new AvallaStepTerm();
+    avallaScenario.add(avallaStepTerm);
   }
 
   /**
-   * @param assertEquals
+   *
+   * @param avallaScenario
+   * @param javaAssertionTerm
    */
   @Override
-  public void setCheckTerm(Scenario avallaScenario, Object assertEquals) {
-
+  public void setCheckTerm(Scenario avallaScenario, JavaAssertionTerm javaAssertionTerm) {
+    AvallaCheckTerm avallaCheckTerm = new AvallaCheckTerm();
+    avallaCheckTerm.setActual(retrieveActual(javaAssertionTerm.getActual()));
+    avallaCheckTerm.setExpected(retrieveExpected(javaAssertionTerm.getExpected()));
+    avallaScenario.add(avallaCheckTerm);
   }
 
-  private String retrieveValue(Variable variable){
-    String value = variable.getValue();
-    return variable.isPrimitive() ?
+  private String retrieveValue(JavaVariableTerm javaVariable){
+    String value = javaVariable.getValue();
+    return javaVariable.isPrimitive() ?
         value :
         value.substring(value.lastIndexOf('.')+1);
+  }
+
+  private String retrieveAsmName(String asmName){
+    return asmName.substring(0,asmName.lastIndexOf("_ASM"));
+  }
+
+  private String retrieveActual(String actual){
+    return actual.substring(actual.lastIndexOf(".")+1);
+  }
+
+  private String retrieveExpected(String expected){
+    return expected.substring(
+        expected.lastIndexOf(".get_")+5).replaceAll("\\(\\)","");
   }
 
 }

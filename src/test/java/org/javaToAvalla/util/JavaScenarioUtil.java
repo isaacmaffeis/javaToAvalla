@@ -2,8 +2,7 @@ package org.javaToAvalla.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.javaToAvalla.model.Argument;
-import org.javaToAvalla.model.Variable;
+import org.javaToAvalla.model.terms.JavaArgumentTerm;
 
 public class JavaScenarioUtil {
 
@@ -51,45 +50,45 @@ public class JavaScenarioUtil {
 
   }
 
-  public static List<Argument> getArgumentList_RegistroDiCassa() {
+  public static List<JavaArgumentTerm> getArgumentList_RegistroDiCassa() {
 
-    List<Argument> stepFunctionArgsList = new ArrayList<>();
+    List<JavaArgumentTerm> stepFunctionArgsList = new ArrayList<>();
 
-    Argument argument0 = new Argument();
-    argument0.setName("servizioSelezionato");
-    argument0.setType("RegistroDiCassa.Servizio");
-    argument0.setPrimitive(false);
-    stepFunctionArgsList.add(argument0);
+    JavaArgumentTerm javaArgumentTerm0 = new JavaArgumentTerm();
+    javaArgumentTerm0.setName("servizioSelezionato");
+    javaArgumentTerm0.setType("RegistroDiCassa.Servizio");
+    javaArgumentTerm0.setPrimitive(false);
+    stepFunctionArgsList.add(javaArgumentTerm0);
 
-    Argument argument1 = new Argument();
-    argument1.setName("pizzaInserita");
-    argument1.setType("String");
-    argument1.setPrimitive(true);
-    stepFunctionArgsList.add(argument1);
+    JavaArgumentTerm javaArgumentTerm1 = new JavaArgumentTerm();
+    javaArgumentTerm1.setName("pizzaInserita");
+    javaArgumentTerm1.setType("String");
+    javaArgumentTerm1.setPrimitive(true);
+    stepFunctionArgsList.add(javaArgumentTerm1);
 
-    Argument argument2 = new Argument();
-    argument2.setName("sceltaDiAggiuntaPizza");
-    argument2.setType("RegistroDiCassa.AggiungiPizza");
-    argument2.setPrimitive(false);
-    stepFunctionArgsList.add(argument2);
+    JavaArgumentTerm javaArgumentTerm2 = new JavaArgumentTerm();
+    javaArgumentTerm2.setName("sceltaDiAggiuntaPizza");
+    javaArgumentTerm2.setType("RegistroDiCassa.AggiungiPizza");
+    javaArgumentTerm2.setPrimitive(false);
+    stepFunctionArgsList.add(javaArgumentTerm2);
 
-    Argument argument3 = new Argument();
-    argument3.setName("sceltaDelTipoPizza");
-    argument3.setType("RegistroDiCassa.SelezioneTipoDiPizza");
-    argument3.setPrimitive(false);
-    stepFunctionArgsList.add(argument3);
+    JavaArgumentTerm javaArgumentTerm3 = new JavaArgumentTerm();
+    javaArgumentTerm3.setName("sceltaDelTipoPizza");
+    javaArgumentTerm3.setType("RegistroDiCassa.SelezioneTipoDiPizza");
+    javaArgumentTerm3.setPrimitive(false);
+    stepFunctionArgsList.add(javaArgumentTerm3);
 
-    Argument argument4 = new Argument();
-    argument4.setName("insertQuantita");
-    argument4.setType("int");
-    argument4.setPrimitive(true);
-    stepFunctionArgsList.add(argument4);
+    JavaArgumentTerm javaArgumentTerm4 = new JavaArgumentTerm();
+    javaArgumentTerm4.setName("insertQuantita");
+    javaArgumentTerm4.setType("int");
+    javaArgumentTerm4.setPrimitive(true);
+    stepFunctionArgsList.add(javaArgumentTerm4);
 
-    Argument argument5 = new Argument();
-    argument5.setName("insertPrezzo");
-    argument5.setType("int");
-    argument5.setPrimitive(true);
-    stepFunctionArgsList.add(argument5);
+    JavaArgumentTerm javaArgumentTerm5 = new JavaArgumentTerm();
+    javaArgumentTerm5.setName("insertPrezzo");
+    javaArgumentTerm5.setType("int");
+    javaArgumentTerm5.setPrimitive(true);
+    stepFunctionArgsList.add(javaArgumentTerm5);
 
     return stepFunctionArgsList;
   }

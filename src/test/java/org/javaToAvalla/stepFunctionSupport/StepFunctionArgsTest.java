@@ -16,7 +16,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.javaToAvalla.antlr.StepFunctionArgsLexer;
 import org.javaToAvalla.antlr.StepFunctionArgsParser;
-import org.javaToAvalla.model.Argument;
+import org.javaToAvalla.model.terms.JavaArgumentTerm;
 import org.junit.Test;
 
 public class StepFunctionArgsTest {
@@ -38,35 +38,35 @@ public class StepFunctionArgsTest {
 
     assertThat(stepFunctionSupportWalker.getArgumentList().size(), is(6));
 
-    Argument argument = stepFunctionSupportWalker.getArgumentList().get(0);
-    assertThat(argument.getName(), is("servizioSelezionato"));
-    assertThat(argument.getType(), is("RegistroDiCassa.Servizio"));
-    assertThat(argument.isPrimitive(), is(false));
+    JavaArgumentTerm javaArgumentTerm = stepFunctionSupportWalker.getArgumentList().get(0);
+    assertThat(javaArgumentTerm.getName(), is("servizioSelezionato"));
+    assertThat(javaArgumentTerm.getType(), is("RegistroDiCassa.Servizio"));
+    assertThat(javaArgumentTerm.isPrimitive(), is(false));
 
-    argument = stepFunctionSupportWalker.getArgumentList().get(1);
-    assertThat(argument.getName(), is("pizzaInserita"));
-    assertThat(argument.getType(), is("String"));
-    assertThat(argument.isPrimitive(), is(true));
+    javaArgumentTerm = stepFunctionSupportWalker.getArgumentList().get(1);
+    assertThat(javaArgumentTerm.getName(), is("pizzaInserita"));
+    assertThat(javaArgumentTerm.getType(), is("String"));
+    assertThat(javaArgumentTerm.isPrimitive(), is(true));
 
-    argument = stepFunctionSupportWalker.getArgumentList().get(2);
-    assertThat(argument.getName(), is("sceltaDiAggiuntaPizza"));
-    assertThat(argument.getType(), is("RegistroDiCassa.AggiungiPizza"));
-    assertThat(argument.isPrimitive(), is(false));
+    javaArgumentTerm = stepFunctionSupportWalker.getArgumentList().get(2);
+    assertThat(javaArgumentTerm.getName(), is("sceltaDiAggiuntaPizza"));
+    assertThat(javaArgumentTerm.getType(), is("RegistroDiCassa.AggiungiPizza"));
+    assertThat(javaArgumentTerm.isPrimitive(), is(false));
 
-    argument = stepFunctionSupportWalker.getArgumentList().get(3);
-    assertThat(argument.getName(), is("sceltaDelTipoPizza"));
-    assertThat(argument.getType(), is("RegistroDiCassa.SelezioneTipoDiPizza"));
-    assertThat(argument.isPrimitive(), is(false));
+    javaArgumentTerm = stepFunctionSupportWalker.getArgumentList().get(3);
+    assertThat(javaArgumentTerm.getName(), is("sceltaDelTipoPizza"));
+    assertThat(javaArgumentTerm.getType(), is("RegistroDiCassa.SelezioneTipoDiPizza"));
+    assertThat(javaArgumentTerm.isPrimitive(), is(false));
 
-    argument = stepFunctionSupportWalker.getArgumentList().get(4);
-    assertThat(argument.getName(), is("insertQuantita"));
-    assertThat(argument.getType(), is("int"));
-    assertThat(argument.isPrimitive(), is(true));
+    javaArgumentTerm = stepFunctionSupportWalker.getArgumentList().get(4);
+    assertThat(javaArgumentTerm.getName(), is("insertQuantita"));
+    assertThat(javaArgumentTerm.getType(), is("int"));
+    assertThat(javaArgumentTerm.isPrimitive(), is(true));
 
-    argument = stepFunctionSupportWalker.getArgumentList().get(5);
-    assertThat(argument.getName(), is("insertPrezzo"));
-    assertThat(argument.getType(), is("int"));
-    assertThat(argument.isPrimitive(), is(true));
+    javaArgumentTerm = stepFunctionSupportWalker.getArgumentList().get(5);
+    assertThat(javaArgumentTerm.getName(), is("insertPrezzo"));
+    assertThat(javaArgumentTerm.getType(), is("int"));
+    assertThat(javaArgumentTerm.isPrimitive(), is(true));
 
   }
 

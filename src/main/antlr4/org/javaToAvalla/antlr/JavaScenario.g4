@@ -49,10 +49,10 @@ expected
     ;
 
 stepFunction
-    : StepFunc LPAREN argument? (COMMA argument)* RPAREN SEMI
+    : StepFunc LPAREN javaArgumentTerm? (COMMA javaArgumentTerm)* RPAREN SEMI
     ;
 
-argument
+javaArgumentTerm
     : (ID | STRING | INT+)
     ;
 
@@ -101,16 +101,16 @@ STRING
     ;
 
 ASMID
-    : [a-zA-Z_][a-zA-Z_0-9]*[_ASM]
+    : [a-zA-Z_][a-zA-Z_0-9]*'_ASM'
     ;
 
 ASSERT_EQUALS
     : 'assertEquals'
     ;
 
-AND : 'and' ;
-OR : 'or' ;
-NOT : 'not' ;
+AND : '&&' ;
+OR : '||' ;
+NOT : '!' ;
 EQ : '=' ;
 COMMA : ',' ;
 COLONS : ':' ;

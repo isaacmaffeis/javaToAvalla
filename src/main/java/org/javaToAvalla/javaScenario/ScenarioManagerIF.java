@@ -2,18 +2,19 @@ package org.javaToAvalla.javaScenario;
 
 import java.util.List;
 import org.javaToAvalla.model.Scenario;
-import org.javaToAvalla.model.Variable;
+import org.javaToAvalla.model.terms.JavaAssertionTerm;
+import org.javaToAvalla.model.terms.JavaVariableTerm;
 
 public interface ScenarioManagerIF {
 
-  void setHeader();
+  void setHeaderTerm(Scenario avallaScenario, String asmName, int scenarioName);
 
-  void setLoad();
+  void setLoadTerm(Scenario avallaScenario, String asmName);
 
-  void setSetTerm(Scenario avallaScenario, List<Variable> variablesList);
+  void setSetTerm(Scenario avallaScenario, List<JavaVariableTerm> variablesList);
 
   void setStepTerm(Scenario avallaScenario);
 
-  void setCheckTerm(Scenario avallaScenario, Object assertEquals);
+  void setCheckTerm(Scenario avallaScenario, JavaAssertionTerm javaAssertionTerm);
 
 }

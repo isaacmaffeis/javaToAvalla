@@ -49,10 +49,10 @@ expected
     ;
 
 stepFunction
-    : StepFunc LPAREN javaArgumentTerm? (COMMA javaArgumentTerm)* RPAREN SEMI
+    : StepFunc LPAREN argument? (COMMA argument)* RPAREN SEMI
     ;
 
-javaArgumentTerm
+argument
     : (ID | STRING | INT+)
     ;
 

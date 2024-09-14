@@ -5,10 +5,10 @@ grammar StepFunctionArgs;
  */
 
 argumentList
-  : (javaArgumentTerm (',' javaArgumentTerm)*)?
+  : (argument (',' argument)*)?
   ;
 
-javaArgumentTerm
+argument
   : type name
   ;
 

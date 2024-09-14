@@ -26,7 +26,7 @@ public class JavaScenarioListenerTest {
     JavaScenarioParser javaScenarioParser = new JavaScenarioParser(tokens);
     ParseTreeWalker walker = new ParseTreeWalker();
     JavaScenarioListener javaScenarioWalker = new JavaScenarioListener(stepFunctionArgsList);
-    walker.walk(javaScenarioWalker, javaScenarioParser.scenario());
+    walker.walk(javaScenarioWalker, javaScenarioParser.start());
 
     assertThat(javaScenarioWalker.getCurrentVariablesList().size(), is(6));
 

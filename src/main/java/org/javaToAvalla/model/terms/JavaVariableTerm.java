@@ -1,24 +1,26 @@
 package org.javaToAvalla.model.terms;
 
 /**
- *
+ * Represents a Java variable term, extending the {@code JavaArgumentTerm} class.
+ * <p>
+ * This class is used to define a variable in a Java context, storing its value as a string.
+ * It provides methods to retrieve and set the value of the variable.
+ * </p>
  */
 public class JavaVariableTerm extends JavaArgumentTerm {
 
-  /**
-   * The value of the variable.
-   */
+  /** The value of the variable. */
   private String value;
 
   /**
-   * Default constructor for the {@code Variable} class.
-   * Initializes an empty variable.
+   * Default constructor for the {@code JavaVariableTerm} class.
+   * Initializes an empty variable without a value.
    */
   public JavaVariableTerm() {
   }
 
   /**
-   * Returns the type of the variable.
+   * Returns the value of the variable.
    *
    * @return the variable's value as a {@code String}.
    */
@@ -34,5 +36,5 @@ public class JavaVariableTerm extends JavaArgumentTerm {
   public void setValue(String value) {
     this.value = value;
   }
-
 }
+

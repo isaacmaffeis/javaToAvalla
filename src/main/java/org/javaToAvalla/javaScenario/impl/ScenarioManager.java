@@ -66,8 +66,8 @@ public class ScenarioManager implements ScenarioManagerIF {
   @Override
   public void setCheckTerm(Scenario avallaScenario, JavaAssertionTerm javaAssertionTerm) {
     AvallaCheckTerm avallaCheckTerm = new AvallaCheckTerm();
-    avallaCheckTerm.setActual(retrieveActual(javaAssertionTerm.getActual()));
-    avallaCheckTerm.setExpected(retrieveExpected(javaAssertionTerm.getExpected()));
+    avallaCheckTerm.setLeftTerm(retrieveActual(javaAssertionTerm.getActual()));
+    avallaCheckTerm.setRightTerm(retrieveExpected(javaAssertionTerm.getExpected()));
     avallaScenario.add(avallaCheckTerm);
   }
 

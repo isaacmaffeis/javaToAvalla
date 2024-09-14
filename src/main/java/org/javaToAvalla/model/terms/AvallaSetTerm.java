@@ -1,5 +1,12 @@
 package org.javaToAvalla.model.terms;
 
+/**
+ * Represents a set term in the Avalla language, which holds a name and a corresponding value.
+ * <p>
+ * This class is used to define a term with a specific name and value, typically representing
+ * a setting or configuration within a scenario in the Avalla framework.
+ * </p>
+ */
 public class AvallaSetTerm extends AvallaTerm {
 
   /**
@@ -8,23 +15,22 @@ public class AvallaSetTerm extends AvallaTerm {
   private String name;
 
   /**
-   * The value of the Set Term.
+   * The value of the Set term.
    */
   private String value;
 
   /**
-   * Default constructor for the {@code SetTerm} class.
-   * Initializes an empty Avala Term.
+   * Default constructor for the {@code AvallaSetTerm} class.
+   * Initializes an empty {@code AvallaSetTerm} with no name or value.
    */
   public AvallaSetTerm() {
   }
 
   /**
-   * All Args constructor for the {@code SetTerm} class.
-   * Initialize a new setTerm with name and value.
+   * Constructs an {@code AvallaSetTerm} with the specified name and value.
    *
-   * @param name The name of the Set term.
-   * @param value The value of the Set Term.
+   * @param name  the name of the Set term.
+   * @param value the value of the Set term.
    */
   public AvallaSetTerm(String name, String value) {
     this.name = name;
@@ -34,16 +40,16 @@ public class AvallaSetTerm extends AvallaTerm {
   /**
    * Sets the name of the Set term.
    *
-   * @param name the name of the term.
+   * @param name the name to set for this Set term.
    */
   public void setName(String name) {
     this.name = name;
   }
 
   /**
-   * Sets the value of the Set Term.
+   * Sets the value of the Set term.
    *
-   * @param value the value of the Set Term.
+   * @param value the value to set for this Set term.
    */
   public void setValue(String value) {
     this.value = value;
@@ -52,19 +58,18 @@ public class AvallaSetTerm extends AvallaTerm {
   /**
    * Returns the name of the Set term.
    *
-   * @return the term's name as a {@code String}.
+   * @return the name of the Set term.
    */
   public String getName() {
     return name;
   }
 
   /**
-   * Returns the type of the Set Term.
+   * Returns the value of the Set term.
    *
-   * @return the Set Term's value as a {@code String}.
+   * @return the value of the Set term.
    */
   public String getValue() {
     return value;
   }
-
 }

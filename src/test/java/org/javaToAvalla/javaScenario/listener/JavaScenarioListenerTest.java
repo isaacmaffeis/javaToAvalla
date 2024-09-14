@@ -30,8 +30,6 @@ public class JavaScenarioListenerTest {
 
     assertThat(javaScenarioWalker.getCurrentVariablesList().size(), is(6));
 
-    System.out.println(javaScenarioWalker.getCurrentVariablesList().toString());
-
   }
 
 }

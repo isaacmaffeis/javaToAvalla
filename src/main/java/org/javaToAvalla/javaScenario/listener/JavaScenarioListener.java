@@ -78,6 +78,8 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void enterAsmDeclaration(AsmDeclarationContext ctx) {
     this.asmName = ctx.ASMID(0).getText();
+    this.scenarioManagerIF.setHeaderTerm(this.currenteScenario, this.asmName, this.scenarioIndex);
+    this.scenarioManagerIF.setLoadTerm(this.currenteScenario, this.asmName);
   }
 
   /**
@@ -91,8 +93,6 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   public void enterScenario(ScenarioContext ctx) {
     this.variablesList = new HashMap<>();
     this.currenteScenario = new Scenario();
-    this.scenarioManagerIF.setHeaderTerm(this.currenteScenario, this.asmName, this.scenarioIndex);
-    this.scenarioManagerIF.setLoadTerm(this.currenteScenario, this.asmName);
   }
 
   /**

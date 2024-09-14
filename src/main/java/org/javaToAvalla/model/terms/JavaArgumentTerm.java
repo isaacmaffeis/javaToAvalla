@@ -1,18 +1,13 @@
-package org.javaToAvalla.stepFunctionSupport.model;
+package org.javaToAvalla.model.terms;
 
 /**
  * The {@code Argument} class represents a function argument with a type, name,
  * and an indicator of whether it is a primitive type or not.
  */
-public class Argument {
+public class JavaArgumentTerm extends JavaTerm {
 
   /**
-   * The type of the argument.
-   */
-  private String type;
-
-  /**
-   * The name of the argument.
+   * The name of the Argument.
    */
   private String name;
 
@@ -29,20 +24,11 @@ public class Argument {
    * Default constructor for the {@code Argument} class.
    * Initializes an empty argument.
    */
-  public Argument() {
+  public JavaArgumentTerm() {
   }
 
   /**
-   * Sets the type of the argument.
-   *
-   * @param type the type of the argument.
-   */
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  /**
-   * Sets the name of the argument.
+   * Sets the name of the Argument.
    *
    * @param name the name of the argument.
    */
@@ -57,15 +43,6 @@ public class Argument {
    */
   public void setPrimitive(boolean primitive) {
     isPrimitive = primitive;
-  }
-
-  /**
-   * Returns the type of the argument.
-   *
-   * @return the argument's type as a {@code String}.
-   */
-  public String getType() {
-    return type;
   }
 
   /**

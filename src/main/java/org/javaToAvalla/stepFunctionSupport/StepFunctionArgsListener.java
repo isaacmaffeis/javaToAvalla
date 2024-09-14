@@ -7,31 +7,31 @@ import org.javaToAvalla.antlr.StepFunctionArgsBaseListener;
 import org.javaToAvalla.antlr.StepFunctionArgsParser.ArgumentContext;
 import org.javaToAvalla.antlr.StepFunctionArgsParser.NameContext;
 import org.javaToAvalla.antlr.StepFunctionArgsParser.TypeContext;
-import org.javaToAvalla.stepFunctionSupport.model.Argument;
+import org.javaToAvalla.model.terms.JavaArgumentTerm;
 
 /**
  *
  */
 public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
 
-  private final List<Argument> argumentList;
+  private final List<JavaArgumentTerm> javaArgumentTermList;
 
-  private Argument currentArgument;
+  private JavaArgumentTerm currentJavaArgumentTerm;
 
   public StepFunctionArgsListener() {
-    this.argumentList = new ArrayList<>();
+    this.javaArgumentTermList = new ArrayList<>();
   }
 
   /**
    * {@inheritDoc}
    *
-   * <p>The default implementation does nothing.</p>
+   * <p>Create a new empty Argument.</p>
    *
    * @param ctx
    */
   @Override
   public void enterArgument(ArgumentContext ctx) {
-    this.currentArgument = new Argument();
+    this.currentJavaArgumentTerm = new JavaArgumentTerm();
   }
 
   /**
@@ -43,7 +43,7 @@ public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
    */
   @Override
   public void exitArgument(ArgumentContext ctx) {
-    this.argumentList.add(this.currentArgument);
+    this.javaArgumentTermList.add(this.currentJavaArgumentTerm);
   }
 
   /**
@@ -55,9 +55,9 @@ public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
    */
   @Override
   public void enterType(TypeContext ctx) {
-    this.currentArgument.setType(ctx.getText());
+    this.currentJavaArgumentTerm.setType(ctx.getText());
     TerminalNode primitiveType = ctx.PrimitiveType();
-    this.currentArgument.setPrimitive(primitiveType != null);
+    this.currentJavaArgumentTerm.setPrimitive(primitiveType != null);
   }
 
   /**
@@ -69,15 +69,15 @@ public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
    */
   @Override
   public void enterName(NameContext ctx) {
-    this.currentArgument.setName(ctx.getText());
+    this.currentJavaArgumentTerm.setName(ctx.getText());
   }
 
   /**
    *
    * @return
    */
-  public List<Argument> getArgumentList() {
-    return argumentList;
+  public List<JavaArgumentTerm> getArgumentList() {
+    return javaArgumentTermList;
   }
 
 }

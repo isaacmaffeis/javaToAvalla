@@ -11,7 +11,6 @@
  *   <li>{@code listener} - Contains the listener-based implementation for parsing and processing
  *   scenarios, including {@link org.javaToAvalla.javaScenario.listener.JavaScenarioListener}.</li>
  * </ul>
- * </p>
  */
 
 package org.javaToAvalla.javaScenario;

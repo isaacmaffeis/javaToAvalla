@@ -1,7 +1,7 @@
 package org.javaToAvalla.model.terms;
 
 /**
- * The {@code Argument} class represents a function argument with a type, name,
+ * The {@code Argument} class represents a function argument with a name
  * and an indicator of whether it is a primitive type or not.
  */
 public class JavaArgumentTerm extends JavaTerm {

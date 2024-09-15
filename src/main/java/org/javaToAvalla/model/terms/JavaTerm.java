@@ -1,28 +1,33 @@
 package org.javaToAvalla.model.terms;
 
-public abstract class JavaTerm extends Term{
+/**
+ * Abstract class representing a generic Java term.
+ * <p>
+ * {@code JavaTerm} extends the {@code Term} class and provides a common structure
+ * for Java-specific terms, including a type field that describes the term's type.
+ * It serves as a base class for more specialized Java terms.
+ * </p>
+ */
+public abstract class JavaTerm extends Term {
 
-  /**
-   * The type of the Java Term.
-   */
+  /** The type of the Java term. */
   private String type;
 
   /**
-   * Sets the type of the Java Term.
+   * Sets the type of the Java term.
    *
-   * @param type the type of the Java Term.
+   * @param type the type of the Java term as a {@code String}.
    */
   public void setType(String type) {
     this.type = type;
   }
 
   /**
-   * Returns the type of the Java Term.
+   * Returns the type of the Java term.
    *
-   * @return the Java Term's type as a {@code String}.
+   * @return the type of the Java term as a {@code String}.
    */
   public String getType() {
     return type;
   }
-
 }

@@ -27,27 +27,61 @@ import org.javaToAvalla.model.terms.JavaVariableTerm;
 
 public class JavaScenarioListener extends JavaScenarioBaseListener {
 
+  /**
+   * List of arguments of the step function.
+   */
   private final List<JavaArgumentTerm> stepFunctionArgsList;
 
+  /**
+   * List of scenarios parsed and processed.
+   */
   private final List<Scenario> scenarioList;
 
+  /**
+   * Map of declared variables within the current scenario.
+   */
   private Map<String, JavaVariableTerm> variablesList;
 
+  /**
+   * List of currently processed variables during a step function.
+   */
   private List<JavaVariableTerm> currentVariablesList;
 
+  /**
+   * The Scenario Manager interface to manage and transform scenario terms.
+   */
   private final ScenarioManagerIF scenarioManagerIF;
 
+  /**
+   * The current scenario index.
+   */
   private int scenarioIndex;
 
+  /**
+   * The current argument index within the step function.
+   */
   private int argumentIndex;
 
+  /**
+   * The current Java variable being processed.
+   */
   private JavaVariableTerm currentJavaVariable;
 
+  /**
+   * The current scenario being processed.
+   */
   private Scenario currenteScenario;
 
+  /**
+   * The current Java assertion being processed.
+   */
   private JavaAssertionTerm currentJavaAssertionTerm;
 
-
+  /**
+   * Constructor for the {@code JavaScenarioListener}.
+   *
+   * @param stepFunctionArgsList List of {@link JavaArgumentTerm} representing arguments for the step function.
+   */
   public JavaScenarioListener(List<JavaArgumentTerm> stepFunctionArgsList) {
     this.stepFunctionArgsList = stepFunctionArgsList;
     this.scenarioManagerIF = new ScenarioManager();
@@ -56,10 +90,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Initializes the scenario index to zero.</p>
    *
-   * <p>The default implementation does nothing.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterStart(StartContext ctx) {
@@ -68,10 +101,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Processes the ASM declaration and adds header and load terms to the current scenario.</p>
    *
-   * <p>The default implementation does nothing.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterAsmDeclaration(AsmDeclarationContext ctx) {
@@ -82,10 +114,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Initializes the variable map and creates a new scenario object.</p>
    *
-   * <p>The default implementation does nothing.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterScenario(ScenarioContext ctx) {
@@ -95,10 +126,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Creates a new empty {@link JavaVariableTerm} for the variable declaration.</p>
    *
-   * <p>Create e new empty variable.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterVariableDeclaration(VariableDeclarationContext ctx) {
@@ -107,10 +137,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Sets the type of the current variable.</p>
    *
-   * <p>Set the type of the variable.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterVariableType(VariableTypeContext ctx) {
@@ -120,10 +149,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Sets the name of the current variable.</p>
    *
-   * <p>Set the name of the variable.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterVariableName(VariableNameContext ctx) {
@@ -132,10 +160,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Sets the value of the current variable.</p>
    *
-   * <p>Set the value of the variable.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterVariableValue(VariableValueContext ctx) {
@@ -144,10 +171,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Adds the current variable to the variables map.</p>
    *
-   * <p>Add the current variable to the current variable list.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void exitVariableDeclaration(VariableDeclarationContext ctx) {
@@ -156,10 +182,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Initializes the current variables list and resets the argument index.</p>
    *
-   * <p>Create a new current variables list.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterStepFunction(StepFunctionContext ctx) {
@@ -169,10 +194,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Processes an argument within a step function and assigns it to the current variable.</p>
    *
-   * <p>The default implementation does nothing.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterArgument(ArgumentContext ctx) {
@@ -197,10 +221,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Processes a step function, setting the necessary terms in the scenario.</p>
    *
-   * <p>The default implementation does nothing.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void exitStepFunction(StepFunctionContext ctx) {
@@ -210,10 +233,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Initializes the assertion term for {@code assertEquals} checks.</p>
    *
-   * <p>The default implementation does nothing.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterAssertEquals(AssertEqualsContext ctx) {
@@ -223,10 +245,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Sets the actual value in the assertion term.</p>
    *
-   * <p>The default implementation does nothing.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterActual(ActualContext ctx) {
@@ -235,10 +256,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Sets the expected value in the assertion term.</p>
    *
-   * <p>The default implementation does nothing.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void enterExpected(ExpectedContext ctx) {
@@ -247,10 +267,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Processes the assertion term for {@code assertEquals} and adds it to the scenario.</p>
    *
-   * <p>The default implementation does nothing.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void exitAssertEquals(AssertEqualsContext ctx) {
@@ -259,10 +278,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
+   * <p>Adds the completed scenario to the scenario list.</p>
    *
-   * <p>The default implementation does nothing.</p>
-   *
-   * @param ctx
+   * @param ctx the parse tree context.
    */
   @Override
   public void exitScenario(ScenarioContext ctx) {
@@ -270,8 +288,9 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   }
 
   /**
+   * Returns the list of scenarios that have been processed by this listener.
    *
-   * @return
+   * @return a list of {@link Scenario} objects.
    */
   public List<Scenario> getScenarioList() {
     return scenarioList;

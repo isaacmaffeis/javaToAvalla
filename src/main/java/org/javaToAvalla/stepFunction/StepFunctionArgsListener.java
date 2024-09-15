@@ -1,0 +1,105 @@
+package org.javaToAvalla.stepFunction;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.antlr.v4.runtime.tree.TerminalNode;
+import org.javaToAvalla.antlr.StepFunctionArgsBaseListener;
+import org.javaToAvalla.antlr.StepFunctionArgsParser.ArgumentContext;
+import org.javaToAvalla.antlr.StepFunctionArgsParser.NameContext;
+import org.javaToAvalla.antlr.StepFunctionArgsParser.TypeContext;
+import org.javaToAvalla.model.terms.JavaArgumentTerm;
+
+/**
+ * The {@code StepFunctionArgsListener} class extends {@code StepFunctionArgsBaseListener}
+ * and is responsible for processing and collecting argument terms used in step functions.
+ * It creates and stores {@link JavaArgumentTerm} objects that represent the arguments
+ * encountered during parsing.
+ *
+ * <p>This listener populates a list of {@link JavaArgumentTerm} objects, each of which
+ * stores details about the argument's type, name, and whether it is primitive or not.
+ *
+ * <p>Each {@link JavaArgumentTerm} is created when the {@code enterArgument} method is triggered,
+ * and added to the {@code javaArgumentTermList} when the {@code exitArgument} method is called.
+ */
+public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
+
+  /**
+   * A list of {@link JavaArgumentTerm} objects representing the arguments parsed from
+   * the step function.
+   */
+  private final List<JavaArgumentTerm> javaArgumentTermList;
+
+  /**
+   * The currently processed {@link JavaArgumentTerm} object.
+   */
+  private JavaArgumentTerm currentJavaArgumentTerm;
+
+  /**
+   * Initializes a new {@code StepFunctionArgsListener} with an empty list of
+   * {@link JavaArgumentTerm}.
+   */
+  public StepFunctionArgsListener() {
+    this.javaArgumentTermList = new ArrayList<>();
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Create a new empty {@link JavaArgumentTerm} when an argument is encountered.</p>
+   *
+   * @param ctx the argument parse tree context
+   */
+  @Override
+  public void enterArgument(ArgumentContext ctx) {
+    this.currentJavaArgumentTerm = new JavaArgumentTerm();
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Adds the current {@link JavaArgumentTerm} to the list when the argument has
+   * been fully processed.</p>
+   *
+   * @param ctx the argument parse tree context
+   */
+  @Override
+  public void exitArgument(ArgumentContext ctx) {
+    this.javaArgumentTermList.add(this.currentJavaArgumentTerm);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Sets the type of the argument and marks it as primitive if applicable.</p>
+   *
+   * @param ctx the type parse tree context
+   */
+  @Override
+  public void enterType(TypeContext ctx) {
+    this.currentJavaArgumentTerm.setType(ctx.getText());
+    TerminalNode primitiveType = ctx.PrimitiveType();
+    this.currentJavaArgumentTerm.setPrimitive(primitiveType != null);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Sets the name of the current argument.</p>
+   *
+   * @param ctx the name parse tree context
+   */
+  @Override
+  public void enterName(NameContext ctx) {
+    this.currentJavaArgumentTerm.setName(ctx.getText());
+  }
+
+  /**
+   * Returns the list of {@link JavaArgumentTerm} objects collected during parsing.
+   *
+   * @return a list of {@link JavaArgumentTerm} objects
+   */
+  public List<JavaArgumentTerm> getArgumentList() {
+    return javaArgumentTermList;
+  }
+
+}

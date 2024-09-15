@@ -1,0 +1,8 @@
+org.javaToAvalla
+org.javaToAvalla.antlr
+org.javaToAvalla.javaScenario
+org.javaToAvalla.javaScenario.impl
+org.javaToAvalla.javaScenario.listener
+org.javaToAvalla.model
+org.javaToAvalla.model.terms
+org.javaToAvalla.stepFunction

@@ -15,6 +15,6 @@ public interface ScenarioWriterIF {
    * @param scenario the {@link Scenario} object to be written into a file.
    * @return a {@link ScenarioFile} representing the written scenario.
    */
-  ScenarioFile write(Scenario scenario);
+  public ScenarioFile write(Scenario scenario);
 
 }

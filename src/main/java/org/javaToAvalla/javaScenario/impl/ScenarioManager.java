@@ -1,6 +1,8 @@
 package org.javaToAvalla.javaScenario.impl;
 
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaToAvalla.javaScenario.ScenarioManagerIF;
 import org.javaToAvalla.model.terms.AvallaCheckTerm;
 import org.javaToAvalla.model.terms.AvallaHeaderTerm;
@@ -18,6 +20,8 @@ import org.javaToAvalla.model.terms.JavaVariableTerm;
  */
 public class ScenarioManager implements ScenarioManagerIF {
 
+  private static final Logger log = LogManager.getLogger(ScenarioManager.class);
+
   /**
    * Default constructor for the {@code ScenarioManager} class.
    */
@@ -31,6 +35,7 @@ public class ScenarioManager implements ScenarioManagerIF {
   public void setHeaderTerm(Scenario avallaScenario, String asmName, int scenarioIndex) {
     AvallaHeaderTerm avallaHeaderTerm = new AvallaHeaderTerm();
     avallaHeaderTerm.setScenarioName(retrieveAsmName(asmName) + "_scenario" + scenarioIndex);
+    log.debug("Set AvallaHeaderTerm_name: {} .",avallaHeaderTerm.getScenarioName());
     avallaScenario.add(avallaHeaderTerm);
   }
 
@@ -41,6 +46,7 @@ public class ScenarioManager implements ScenarioManagerIF {
   public void setLoadTerm(Scenario avallaScenario, String asmName) {
     AvallaLoadTerm avallaLoadTerm = new AvallaLoadTerm();
     avallaLoadTerm.setLoad(retrieveAsmName(asmName));
+    log.debug("Set AvallaLoadTerm_load: {} .",avallaLoadTerm.getLoad());
     avallaScenario.add(avallaLoadTerm);
   }
 
@@ -50,9 +56,11 @@ public class ScenarioManager implements ScenarioManagerIF {
   @Override
   public void setSetTerm(Scenario avallaScenario, List<JavaVariableTerm> variablesList) {
     for(JavaVariableTerm javaVariable : variablesList){
-      String name = javaVariable.getName();
-      String value = retrieveValue(javaVariable);
-      AvallaSetTerm avallaSetTerm = new AvallaSetTerm(name, value);
+      AvallaSetTerm avallaSetTerm = new AvallaSetTerm();
+      avallaSetTerm.setName(javaVariable.getName());
+      log.debug("Set AvallaSetTerm_name: {} .",avallaSetTerm.getName());
+      avallaSetTerm.setValue(retrieveValue(javaVariable));
+      log.debug("Set AvallaSetTerm_value: {} .",avallaSetTerm.getValue());
       avallaScenario.add(avallaSetTerm);
     }
   }
@@ -64,6 +72,7 @@ public class ScenarioManager implements ScenarioManagerIF {
   public void setStepTerm(Scenario avallaScenario) {
     AvallaStepTerm avallaStepTerm = new AvallaStepTerm();
     avallaScenario.add(avallaStepTerm);
+    log.debug("Set AvallaStepTerm: step .");
   }
 
   /**
@@ -73,7 +82,9 @@ public class ScenarioManager implements ScenarioManagerIF {
   public void setCheckTerm(Scenario avallaScenario, JavaAssertionTerm javaAssertionTerm) {
     AvallaCheckTerm avallaCheckTerm = new AvallaCheckTerm();
     avallaCheckTerm.setLeftTerm(retrieveActual(javaAssertionTerm.getActual()));
+    log.debug("Set AvallaCheckTerm_leftTerm: {} .",avallaCheckTerm.getLeftTerm());
     avallaCheckTerm.setRightTerm(retrieveExpected(javaAssertionTerm.getExpected()));
+    log.debug("Set AvallaCheckTerm_rightTerm: {} .",avallaCheckTerm.getRightTerm());
     avallaScenario.add(avallaCheckTerm);
   }
 

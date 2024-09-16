@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaToAvalla.fileWriter.FileWriterIF;
 import org.javaToAvalla.model.ScenarioFile;
 
@@ -14,6 +16,8 @@ import org.javaToAvalla.model.ScenarioFile;
  * It implements the {@link FileWriterIF} interface.
  */
 public class FileWriter implements FileWriterIF {
+
+  private static final Logger log = LogManager.getLogger(FileWriter.class);
 
   /**
    * The default output path where files will be written if no specific folder is provided.
@@ -55,22 +59,24 @@ public class FileWriter implements FileWriterIF {
    */
   private boolean write(ScenarioFile scenarioFile, Path outputFolder) {
 
-    try {
-      if (Files.notExists(outputFolder)) {
-        Files.createDirectories(outputFolder);
-      }
-    } catch (IOException e) {
-      throw new RuntimeException("Failed to create output directory: " + outputFolder, e);
+    log.info("Exporting: {} to the folder: {}", scenarioFile.getName(), outputFolder);
+
+    if (!checkPath(outputFolder)) {
+        createPath(outputFolder);
     }
 
     Path fullOutputPath = outputFolder.resolve(
         scenarioFile.getName() + scenarioFile.getExtension());
+    log.info("Output file path: {} .",fullOutputPath);
 
     boolean result = false;
     try {
+      log.info("Writing file to path: {} .",fullOutputPath);
       Files.write(fullOutputPath, scenarioFile.getText().getBytes(StandardCharsets.UTF_8));
+      log.info("File writing operation completed with success.");
       result = true;
     } catch (IOException e) {
+      log.error("Error writing to file: {} .", fullOutputPath);
       throw new RuntimeException("Error writing to file: " + fullOutputPath, e);
     }
 
@@ -95,10 +101,13 @@ public class FileWriter implements FileWriterIF {
    */
   private void createPath(Path path) {
     try {
+      log.info("Path {} doesn't exist.",path);
+      log.info("Creating path {} ...",path);
       Files.createDirectories(path);
-      System.out.println("Directory created: " + path.toAbsolutePath());
-    } catch (IOException e) {
-      System.err.println("Failed to create directory: " + e.getMessage());
+      log.info("Path {} created with success.",path);
+  } catch (IOException e) {
+    log.error("Failed to create path: {} .", path);
+    throw new RuntimeException("Failed to create path: " + path, e);
     }
   }
 }

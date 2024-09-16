@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaToAvalla.antlr.JavaScenarioBaseListener;
 import org.javaToAvalla.antlr.JavaScenarioParser.ActualContext;
 import org.javaToAvalla.antlr.JavaScenarioParser.ArgumentContext;
@@ -26,6 +28,8 @@ import org.javaToAvalla.model.terms.JavaAssertionTerm;
 import org.javaToAvalla.model.terms.JavaVariableTerm;
 
 public class JavaScenarioListener extends JavaScenarioBaseListener {
+
+  private static final Logger log = LogManager.getLogger(JavaScenarioListener.class);
 
   /**
    * List of arguments of the step function.
@@ -96,6 +100,8 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterStart(StartContext ctx) {
+    log.info("Parsing the Java Scenario...");
+    log.debug("Entering start: {} .", ctx.getText());
     this.scenarioIndex = 0;
   }
 
@@ -107,6 +113,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterAsmDeclaration(AsmDeclarationContext ctx) {
+    log.debug("Entering start_test_scenario_asmDeclaration: {} .", ctx.getText());
     String asmName = ctx.ASMID(0).getText();
     this.scenarioManagerIF.setHeaderTerm(this.currenteScenario, asmName, this.scenarioIndex);
     this.scenarioManagerIF.setLoadTerm(this.currenteScenario, asmName);
@@ -120,6 +127,8 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterScenario(ScenarioContext ctx) {
+    log.debug("Entering start_test_scenario: {} .", ctx.getText());
+    log.info("Found a scenario, creating a new Scenario Object.");
     this.variablesList = new HashMap<>();
     this.currenteScenario = new Scenario();
   }
@@ -132,6 +141,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterVariableDeclaration(VariableDeclarationContext ctx) {
+    log.debug("Entering start_test_scenario_variableDeclaration: {} .", ctx.getText());
     this.currentJavaVariable = new JavaVariableTerm();
   }
 
@@ -143,6 +153,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterVariableType(VariableTypeContext ctx) {
+    log.debug("Entering start_test_scenario_variableDeclaration_variableType: {} .", ctx.getText());
     this.currentJavaVariable.setType(ctx.getText());
     this.currentJavaVariable.setPrimitive(false);
   }
@@ -155,6 +166,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterVariableName(VariableNameContext ctx) {
+    log.debug("Entering start_test_scenario_variableDeclaration_variableName: {} .", ctx.getText());
     this.currentJavaVariable.setName(ctx.getText());
   }
 
@@ -166,6 +178,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterVariableValue(VariableValueContext ctx) {
+    log.debug("Entering start_test_scenario_variableDeclaration_variableValue: {} .", ctx.getText());
     this.currentJavaVariable.setValue(ctx.getText());
   }
 
@@ -177,6 +190,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void exitVariableDeclaration(VariableDeclarationContext ctx) {
+    log.debug("Exiting start_test_scenario_variableDeclaration: {} .", ctx.getText());
     this.variablesList.put(this.currentJavaVariable.getName(),this.currentJavaVariable);
   }
 
@@ -188,6 +202,8 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterStepFunction(StepFunctionContext ctx) {
+    log.debug("Entering start_test_scenario_stepFunction: {} .", ctx.getText());
+    log.info("Scenario is valid.");
     this.currentVariablesList = new ArrayList<>();
     this.argumentIndex = 0;
   }
@@ -200,6 +216,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterArgument(ArgumentContext ctx) {
+    log.debug("Entering start_test_scenario_stepFunction_argument: {} .", ctx.getText());
 
     JavaArgumentTerm currentJavaArgumentTerm = stepFunctionArgsList.get(argumentIndex);
     this.currentJavaVariable = new JavaVariableTerm();
@@ -213,8 +230,10 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
     }
     this.currentJavaVariable.setName(currentJavaArgumentTerm.getName());
     this.currentJavaVariable.setType(currentJavaArgumentTerm.getType());
+    log.debug("Created new currentJavaVariable");
 
     this.currentVariablesList.add(currentJavaVariable);
+    log.debug("Added currentJavaVariable to the currentJavaVariable list");
 
     this.argumentIndex += 1;
   }
@@ -227,6 +246,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void exitStepFunction(StepFunctionContext ctx) {
+    log.debug("Exiting start_test_scenario_stepFunction: {} .", ctx.getText());
     this.scenarioManagerIF.setSetTerm(this.currenteScenario,this.currentVariablesList);
     this.scenarioManagerIF.setStepTerm(this.currenteScenario);
   }
@@ -239,6 +259,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterAssertEquals(AssertEqualsContext ctx) {
+    log.debug("Entering start_test_scenario_assertEquals: {} .", ctx.getText());
     this.currentJavaAssertionTerm = new JavaAssertionTerm();
     this.currentJavaAssertionTerm.setType("AssertEquals");
   }
@@ -251,6 +272,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterActual(ActualContext ctx) {
+    log.debug("Entering start_test_scenario_assertEquals_actual: {} .", ctx.getText());
     this.currentJavaAssertionTerm.setActual(ctx.getText());
   }
 
@@ -262,6 +284,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void enterExpected(ExpectedContext ctx) {
+    log.debug("Entering start_test_scenario_assertEquals_expected: {} .", ctx.getText());
     this.currentJavaAssertionTerm.setExpected(ctx.getText());
   }
 
@@ -273,6 +296,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   @Override
   public void exitAssertEquals(AssertEqualsContext ctx) {
+    log.debug("Exiting start_test_scenario_assertEquals: {} . Setting AvallaCheckTerm:", ctx.getText());
     this.scenarioManagerIF.setCheckTerm(this.currenteScenario,this.currentJavaAssertionTerm);
   }
 
@@ -285,6 +309,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void exitScenario(ScenarioContext ctx) {
     this.scenarioList.add(this.currenteScenario);
+    log.info("Scenario processing completed. Scenario added to the list.");
   }
 
   /**

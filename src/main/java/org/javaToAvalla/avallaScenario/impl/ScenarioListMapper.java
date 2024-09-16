@@ -2,6 +2,8 @@ package org.javaToAvalla.avallaScenario.impl;
 
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaToAvalla.avallaScenario.ScenarioListMapperIF;
 import org.javaToAvalla.avallaScenario.ScenarioWriterIF;
 import org.javaToAvalla.model.Scenario;
@@ -14,6 +16,8 @@ import org.javaToAvalla.model.ScenarioFile;
  * It uses the {@link ScenarioWriterIF} to perform the conversion of each valid {@link Scenario}.
  */
 public class ScenarioListMapper implements ScenarioListMapperIF {
+
+  private static final Logger log = LogManager.getLogger(ScenarioListMapper.class);
 
   /**
    * The {@link ScenarioWriterIF} used to convert each {@link Scenario} into a {@link ScenarioFile}.
@@ -40,9 +44,12 @@ public class ScenarioListMapper implements ScenarioListMapperIF {
    */
   @Override
   public List<ScenarioFile> mapScenarioListToFileList(List<Scenario> scenarioList) {
+    log.debug("Mapping ScenarioList to ScenarioFile");
     List<ScenarioFile> scenarioFiles = new LinkedList<>();
     for (Scenario scenario : scenarioList){
+      log.debug("Processing the scenario: {}",scenario);
       if(scenario.isValid()){
+        log.debug("Scenario is valid, mapping scenario to ScenarioFile");
         scenarioFiles.add(scenarioWriter.write(scenario));
       }
     }

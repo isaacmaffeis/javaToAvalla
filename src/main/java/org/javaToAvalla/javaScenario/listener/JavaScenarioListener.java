@@ -203,7 +203,6 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void enterStepFunction(StepFunctionContext ctx) {
     log.debug("Entering start_test_scenario_stepFunction: {} .", ctx.getText());
-    log.info("Scenario is valid.");
     this.currentVariablesList = new ArrayList<>();
     this.argumentIndex = 0;
   }

@@ -1,5 +1,9 @@
 org.javaToAvalla
 org.javaToAvalla.antlr
+org.javaToAvalla.avallaScenario
+org.javaToAvalla.avallaScenario.impl
+org.javaToAvalla.fileWriter
+org.javaToAvalla.fileWriter.impl
 org.javaToAvalla.javaScenario
 org.javaToAvalla.javaScenario.impl
 org.javaToAvalla.javaScenario.listener

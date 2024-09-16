@@ -30,7 +30,7 @@ public class ScenarioManager implements ScenarioManagerIF {
   @Override
   public void setHeaderTerm(Scenario avallaScenario, String asmName, int scenarioIndex) {
     AvallaHeaderTerm avallaHeaderTerm = new AvallaHeaderTerm();
-    avallaHeaderTerm.setScenarioName(retrieveAsmName(asmName) + "_" + scenarioIndex);
+    avallaHeaderTerm.setScenarioName(retrieveAsmName(asmName) + "_scenario" + scenarioIndex);
     avallaScenario.add(avallaHeaderTerm);
   }
 

@@ -17,7 +17,6 @@ public class ScenarioWriterTest {
     ScenarioWriter scenarioWriter = new ScenarioWriter();
     ScenarioFile scenarioFile = scenarioWriter.write(scenario);
 
-    System.out.println(scenarioFile.getText());
     assertEquals(scenarioFile.getText(),ScenarioAvallaUtil.getAvallaScenario());
     assertEquals(scenarioFile.getName(),ScenarioAvallaUtil.avallaHeaderTerm().getScenarioName());
   }

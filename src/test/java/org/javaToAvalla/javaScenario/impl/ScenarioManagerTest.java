@@ -27,7 +27,7 @@ public class ScenarioManagerTest {
 
     AvallaTerm avallaTerm = scenario.remove();
     assertTrue(avallaTerm instanceof AvallaHeaderTerm);
-    assertEquals(((AvallaHeaderTerm) avallaTerm).getScenarioName(),"registroDiCassav3_0");
+    assertEquals(((AvallaHeaderTerm) avallaTerm).getScenarioName(),"registroDiCassav3_scenario0");
   }
 
   @Test

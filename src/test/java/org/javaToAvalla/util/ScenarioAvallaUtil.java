@@ -29,7 +29,7 @@ public class ScenarioAvallaUtil {
 
   public static AvallaHeaderTerm avallaHeaderTerm(){
     AvallaHeaderTerm avallaheaderTerm = new AvallaHeaderTerm();
-    avallaheaderTerm.setScenarioName("registroDiCassav3_0");
+    avallaheaderTerm.setScenarioName("registroDiCassav3_scenario0");
     return  avallaheaderTerm;
   }
 
@@ -107,7 +107,7 @@ public class ScenarioAvallaUtil {
   }
 
   public static String getAvallaScenario(){
-    return "scenario registroDiCassav3_0;" + System.lineSeparator()
+    return "scenario registroDiCassav3_scenario0;" + System.lineSeparator()
         + System.lineSeparator()
         + "load registroDiCassav3.asm;" + System.lineSeparator()
         + System.lineSeparator()
@@ -128,7 +128,7 @@ public class ScenarioAvallaUtil {
 
   public static ScenarioFile getScenarioFile(){
     ScenarioFile scenarioFile = new ScenarioFile();
-    scenarioFile.setName("registroDiCassav3_0");
+    scenarioFile.setName("registroDiCassav3_scenario0");
     scenarioFile.setText(getAvallaScenario());
     return scenarioFile;
   }

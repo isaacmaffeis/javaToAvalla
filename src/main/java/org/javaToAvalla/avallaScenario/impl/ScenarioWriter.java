@@ -57,10 +57,6 @@ public class ScenarioWriter implements ScenarioWriterIF {
   @Override
   public ScenarioFile write(Scenario scenario) {
 
-    if(!scenario.isValid()){
-      return null;
-    }
-
     this.stringBuilder = new StringBuilder();
     ScenarioFile scenarioFile = new ScenarioFile();
 

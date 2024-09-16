@@ -1,6 +1,7 @@
 package org.javaToAvalla.util;
 
 import org.javaToAvalla.model.Scenario;
+import org.javaToAvalla.model.ScenarioFile;
 import org.javaToAvalla.model.terms.AvallaCheckTerm;
 import org.javaToAvalla.model.terms.AvallaHeaderTerm;
 import org.javaToAvalla.model.terms.AvallaLoadTerm;
@@ -123,6 +124,13 @@ public class ScenarioAvallaUtil {
         + "check totale = 0;" + System.lineSeparator()
         + "check statoCassa = SCEGLI_TIPO_DI_PIZZA;"
         + System.lineSeparator();
+  }
+
+  public static ScenarioFile getScenarioFile(){
+    ScenarioFile scenarioFile = new ScenarioFile();
+    scenarioFile.setName("registroDiCassav3_0");
+    scenarioFile.setText(getAvallaScenario());
+    return scenarioFile;
   }
 
 }

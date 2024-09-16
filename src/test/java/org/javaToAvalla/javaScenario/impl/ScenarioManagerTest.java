@@ -101,21 +101,18 @@ public class ScenarioManagerTest {
 
     AvallaTerm avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaCheckTerm);
-    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"\"Scegli il tipo di pizza desiderata:\"");
-    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"outMess");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"\"Scegli il tipo di pizza desiderata:\"");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"outMess");
 
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaCheckTerm);
-    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"0");
-    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"totale");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"0");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"totale");
 
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaCheckTerm);
-    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"SCEGLI_TIPO_DI_PIZZA");
-    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"statoCassa");
-
+    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"SCEGLI_TIPO_DI_PIZZA");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"statoCassa");
   }
 
-
 }
-

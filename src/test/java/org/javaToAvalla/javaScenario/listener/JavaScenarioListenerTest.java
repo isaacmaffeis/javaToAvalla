@@ -55,13 +55,13 @@ public class JavaScenarioListenerTest {
 
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaCheckTerm);
-    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"ATTENDI_ORDINAZIONI");
-    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"statoCassa");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"statoCassa");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"ATTENDI_ORDINAZIONI");
 
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaCheckTerm);
-    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"0");
-    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"totale");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"totale");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"0");
 
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaSetTerm);
@@ -99,18 +99,18 @@ public class JavaScenarioListenerTest {
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaCheckTerm);
     assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),
-        "\"Scegli il tipo di pizza desiderata:\"");
-    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"outMess");
+        "outMess");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"\"Scegli il tipo di pizza desiderata:\"");
 
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaCheckTerm);
-    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"0");
-    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"totale");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"totale");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"0");
 
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaCheckTerm);
-    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"SCEGLI_TIPO_DI_PIZZA");
-    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"statoCassa");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"statoCassa");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"SCEGLI_TIPO_DI_PIZZA");
 
     assertTrue(avallaScenario.getScenario().isEmpty());
 

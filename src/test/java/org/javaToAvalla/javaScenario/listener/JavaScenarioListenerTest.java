@@ -27,7 +27,8 @@ public class JavaScenarioListenerTest {
   public void whenAddNewScenario_ThenParseAndCreateScenarioAvalla() {
 
     String javaFile = JavaScenarioUtil.getJavaFile_RegistroDiCassa();
-    List<JavaArgumentTerm> stepFunctionArgsList = JavaScenarioUtil.getArgumentList_RegistroDiCassa();
+    List<JavaArgumentTerm> stepFunctionArgsList =
+        JavaScenarioUtil.getArgumentList_RegistroDiCassa();
 
     JavaScenarioLexer javaScenarioLexer = new JavaScenarioLexer(CharStreams.fromString(javaFile));
     CommonTokenStream tokens = new CommonTokenStream(javaScenarioLexer);
@@ -45,7 +46,8 @@ public class JavaScenarioListenerTest {
 
     AvallaTerm avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaHeaderTerm);
-    assertEquals(((AvallaHeaderTerm) avallaTerm).getScenarioName(),"RegistroDiCassav3_0");
+    assertEquals(((AvallaHeaderTerm) avallaTerm).getScenarioName(),
+        "RegistroDiCassav3_scenario0");
 
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaLoadTerm);
@@ -96,7 +98,8 @@ public class JavaScenarioListenerTest {
 
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaCheckTerm);
-    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),"\"Scegli il tipo di pizza desiderata:\"");
+    assertEquals(((AvallaCheckTerm) avallaTerm).getLeftTerm(),
+        "\"Scegli il tipo di pizza desiderata:\"");
     assertEquals(((AvallaCheckTerm) avallaTerm).getRightTerm(),"outMess");
 
     avallaTerm = avallaScenario.remove();

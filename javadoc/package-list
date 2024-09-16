@@ -10,3 +10,4 @@ org.javaToAvalla.javaScenario.listener
 org.javaToAvalla.model
 org.javaToAvalla.model.terms
 org.javaToAvalla.stepFunction
+org.javaToAvalla.stepFunction.impl

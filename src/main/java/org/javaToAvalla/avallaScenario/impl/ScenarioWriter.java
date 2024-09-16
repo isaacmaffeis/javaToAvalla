@@ -1,6 +1,9 @@
 package org.javaToAvalla.avallaScenario.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaToAvalla.avallaScenario.ScenarioWriterIF;
+import org.javaToAvalla.fileWriter.impl.FileWriter;
 import org.javaToAvalla.model.Scenario;
 import org.javaToAvalla.model.ScenarioFile;
 import org.javaToAvalla.model.terms.AvallaCheckTerm;
@@ -17,6 +20,8 @@ import org.javaToAvalla.model.terms.AvallaTerm;
  * including headers, loads, sets, steps, and checks.
  */
 public class ScenarioWriter implements ScenarioWriterIF {
+
+  private static final Logger log = LogManager.getLogger(ScenarioWriter.class);
 
   private final char EQ = '=';
 
@@ -56,12 +61,12 @@ public class ScenarioWriter implements ScenarioWriterIF {
    */
   @Override
   public ScenarioFile write(Scenario scenario) {
-
+    log.info("Writing the scenario...");
     this.stringBuilder = new StringBuilder();
     ScenarioFile scenarioFile = new ScenarioFile();
 
     for(AvallaTerm avallaTerm : scenario.getScenario()){
-
+      log.debug("Writing the term: {}",avallaTerm.getClass());
       if(avallaTerm instanceof AvallaHeaderTerm) {
         writeHeader((AvallaHeaderTerm) avallaTerm);
         scenarioFile.setName(((AvallaHeaderTerm) avallaTerm).getScenarioName());
@@ -74,10 +79,10 @@ public class ScenarioWriter implements ScenarioWriterIF {
       } else if (avallaTerm instanceof AvallaCheckTerm) {
         writeCheck((AvallaCheckTerm) avallaTerm);
       }
-
     }
 
     scenarioFile.setText(stringBuilder.toString());
+    log.info("Scenario file written successfully: {}", scenarioFile.getText());
     return scenarioFile;
   }
 
@@ -160,6 +165,5 @@ public class ScenarioWriter implements ScenarioWriterIF {
         .append(SEMI)
         .append(System.lineSeparator());
   }
-
 
 }

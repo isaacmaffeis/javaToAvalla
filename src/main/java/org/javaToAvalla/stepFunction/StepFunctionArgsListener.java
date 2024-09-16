@@ -3,8 +3,11 @@ package org.javaToAvalla.stepFunction;
 import java.util.ArrayList;
 import java.util.List;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.javaToAvalla.antlr.StepFunctionArgsBaseListener;
 import org.javaToAvalla.antlr.StepFunctionArgsParser.ArgumentContext;
+import org.javaToAvalla.antlr.StepFunctionArgsParser.ArgumentListContext;
 import org.javaToAvalla.antlr.StepFunctionArgsParser.NameContext;
 import org.javaToAvalla.antlr.StepFunctionArgsParser.TypeContext;
 import org.javaToAvalla.model.terms.JavaArgumentTerm;
@@ -23,11 +26,13 @@ import org.javaToAvalla.model.terms.JavaArgumentTerm;
  */
 public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
 
+  private static final Logger log = LogManager.getLogger(StepFunctionArgsListener.class);
+
   /**
    * A list of {@link JavaArgumentTerm} objects representing the arguments parsed from
    * the step function.
    */
-  private final List<JavaArgumentTerm> javaArgumentTermList;
+  private List<JavaArgumentTerm> javaArgumentTermList;
 
   /**
    * The currently processed {@link JavaArgumentTerm} object.
@@ -39,7 +44,20 @@ public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
    * {@link JavaArgumentTerm}.
    */
   public StepFunctionArgsListener() {
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Create a new empty {@link ArrayList} when an argumentList is encountered.</p>
+   *
+   * @param ctx the argument parse tree context
+   */
+  @Override
+  public void enterArgumentList(ArgumentListContext ctx) {
+    log.info("Parsing the StepFunctionArgs...");
     this.javaArgumentTermList = new ArrayList<>();
+    log.debug("Created new javaArgumentTermList");
   }
 
   /**
@@ -51,6 +69,7 @@ public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
    */
   @Override
   public void enterArgument(ArgumentContext ctx) {
+    log.debug("Entering argumentList_argument: {} .", ctx.getText());
     this.currentJavaArgumentTerm = new JavaArgumentTerm();
   }
 
@@ -64,6 +83,7 @@ public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
    */
   @Override
   public void exitArgument(ArgumentContext ctx) {
+    log.debug("Exiting argumentList_argument: {} .", ctx.getText());
     this.javaArgumentTermList.add(this.currentJavaArgumentTerm);
   }
 
@@ -76,6 +96,7 @@ public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
    */
   @Override
   public void enterType(TypeContext ctx) {
+    log.debug("Entering argumentList_argument_type: {} .", ctx.getText());
     this.currentJavaArgumentTerm.setType(ctx.getText());
     TerminalNode primitiveType = ctx.PrimitiveType();
     this.currentJavaArgumentTerm.setPrimitive(primitiveType != null);
@@ -90,7 +111,20 @@ public class StepFunctionArgsListener extends StepFunctionArgsBaseListener {
    */
   @Override
   public void enterName(NameContext ctx) {
+    log.debug("Entering argumentList_argument_name: {} .", ctx.getText());
     this.currentJavaArgumentTerm.setName(ctx.getText());
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>Update the log info about the status of the operation.</p>
+   *
+   * @param ctx the name parse tree context
+   */
+  @Override
+  public void exitArgumentList(ArgumentListContext ctx) {
+    log.info("Parsing operation completed with success");
   }
 
   /**

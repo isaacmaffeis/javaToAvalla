@@ -5,15 +5,15 @@ grammar JavaScenario;
  */
 
 start
-    : ClassDeclaration test EOF
+    : ClassDeclaration test RCURLY EOF
     ;
 
 test
-    : TestAnnotation TestDeclaration scenario
+    : (TestAnnotation TestDeclaration scenario)+
     ;
 
 scenario
-    :  (.)*? asmDeclaration (.)*? (variableDeclaration| stepFunction| assertEquals | (.))* RCURLY
+    :  (.)*? asmDeclaration (.)*? (variableDeclaration | stepFunction| assertEquals | ~RCURLY)* RCURLY
     ;
 
 asmDeclaration

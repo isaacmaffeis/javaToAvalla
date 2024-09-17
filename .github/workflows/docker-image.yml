@@ -30,7 +30,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t isaacmaffeis/javaToAvalla:latest .
+      run: docker build -t isaacmaffeis/javatoavalla:latest .
 
     - name: Push Docker image
-      run: docker push isaacmaffeis/javaToAvalla:latest
+      run: docker push isaacmaffeis/javatoavalla:latest

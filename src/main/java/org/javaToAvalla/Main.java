@@ -102,7 +102,7 @@ public class Main {
 
     // clean option
     Option clean = Option.builder("clean")
-        .argName("clean")
+        .argName("<boolean>")
         .type(String.class)
         .hasArg(true)
         .desc("Clean the input and the stepFunctionArgs files.")
@@ -163,7 +163,7 @@ public class Main {
 
     runTheApplication(inputPath, stepFunctionArgsPath, outputFolderPath);
 
-    if(line.hasOption("clean")){
+    if(line.hasOption("clean") && Boolean.parseBoolean(line.getOptionValue("clean"))){
       clean(inputPath);
       if(line.hasOption("stepFunctionArgsPath")){
         clean(stepFunctionArgsPath);

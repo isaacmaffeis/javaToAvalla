@@ -29,13 +29,13 @@ public class ScenarioAvallaUtil {
 
   public static AvallaHeaderTerm avallaHeaderTerm(){
     AvallaHeaderTerm avallaheaderTerm = new AvallaHeaderTerm();
-    avallaheaderTerm.setScenarioName("registroDiCassav3_scenario0");
+    avallaheaderTerm.setScenarioName("RegistroDiCassav3_scenario0");
     return  avallaheaderTerm;
   }
 
   public static AvallaLoadTerm avallaLoadTerm(){
     AvallaLoadTerm avallaLoadTerm = new AvallaLoadTerm();
-    avallaLoadTerm.setLoad("registroDiCassav3");
+    avallaLoadTerm.setLoad("RegistroDiCassav3");
     return avallaLoadTerm;
   }
 
@@ -107,9 +107,9 @@ public class ScenarioAvallaUtil {
   }
 
   public static String getAvallaScenario(){
-    return "scenario registroDiCassav3_scenario0;" + System.lineSeparator()
+    return "scenario RegistroDiCassav3_scenario0" + System.lineSeparator()
         + System.lineSeparator()
-        + "load registroDiCassav3.asm;" + System.lineSeparator()
+        + "load RegistroDiCassav3.asm" + System.lineSeparator()
         + System.lineSeparator()
         + "set servizioSelezionato := NEWORDINE;" + System.lineSeparator()
         + "set pizzaInserita := margherita;" + System.lineSeparator()
@@ -118,7 +118,7 @@ public class ScenarioAvallaUtil {
         + "set insertQuantita := 2;" + System.lineSeparator()
         + "set insertPrezzo := 2;" + System.lineSeparator()
         + System.lineSeparator()
-        + "step;" + System.lineSeparator()
+        + "step" + System.lineSeparator()
         + System.lineSeparator()
         + "check outMess = \"Scegli il tipo di pizza desiderata:\";" + System.lineSeparator()
         + "check totale = 0;" + System.lineSeparator()

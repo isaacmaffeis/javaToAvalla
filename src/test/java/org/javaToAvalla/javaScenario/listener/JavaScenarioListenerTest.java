@@ -71,7 +71,7 @@ public class JavaScenarioListenerTest {
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaSetTerm);
     assertEquals(((AvallaSetTerm) avallaTerm).getName(),"pizzaInserita");
-    assertEquals(((AvallaSetTerm) avallaTerm).getValue(),"\"margherita\"");
+    assertEquals(((AvallaSetTerm) avallaTerm).getValue(),"margherita");
 
     avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaSetTerm);

@@ -5,7 +5,7 @@ grammar JavaScenario;
  */
 
 start
-    : ClassDeclaration test EOF
+    : ClassDeclaration test RCURLY EOF
     ;
 
 test
@@ -13,7 +13,7 @@ test
     ;
 
 scenario
-    :  (.)*? asmDeclaration (.)*? (variableDeclaration| stepFunction| assertEquals | ~RCURLY)* RCURLY
+    :  (.)*? asmDeclaration (.)*? (variableDeclaration | stepFunction| assertEquals | ~RCURLY)* RCURLY
     ;
 
 asmDeclaration

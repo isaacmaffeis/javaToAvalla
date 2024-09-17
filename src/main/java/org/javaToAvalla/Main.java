@@ -1,6 +1,8 @@
 package org.javaToAvalla;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -98,10 +100,19 @@ public class Main {
         .desc("The output folder (optional, defaults to `./output/`)")
         .build();
 
+    // clean option
+    Option clean = Option.builder("clean")
+        .argName("clean")
+        .type(String.class)
+        .hasArg(true)
+        .desc("Clean the input and the stepFunctionArgs files.")
+        .build();
+
     options.addOption(help);
     options.addOption(input);
     options.addOption(stepFunctionArgs);
     options.addOption(output);
+    options.addOption(clean);
 
     return options;
   }
@@ -152,6 +163,15 @@ public class Main {
 
     runTheApplication(inputPath, stepFunctionArgsPath, outputFolderPath);
 
+    if(line.hasOption("clean")){
+      clean(inputPath);
+      if(line.hasOption("stepFunctionArgsPath")){
+        clean(stepFunctionArgsPath);
+      }
+      else{
+        clean(StepFunctionReader.DEFAULT_PATH);
+      }
+    }
   }
 
   private void checkFile(Path path) throws FileNotFoundException {
@@ -163,6 +183,14 @@ public class Main {
   private void checkFolder(Path path) throws FileNotFoundException {
     if(!path.toFile().exists()) {
       throw new FileNotFoundException("Specified folder doesn't exist: " + path);
+    }
+  }
+
+  private void clean(Path path){
+    try {
+      Files.delete(path);
+    } catch (IOException e) {
+      throw new RuntimeException("Errors while cleaning the path: " +path,e);
     }
   }
 

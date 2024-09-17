@@ -32,7 +32,7 @@ public class StepFunctionReader implements StepFunctionReaderIF {
   /**
    * Default path of the stepFunctionArgs.
    */
-  private final Path DEFAULT_PATH = Paths.get(
+  public static final Path DEFAULT_PATH = Paths.get(
       System.getProperty("user.dir"),
       "input",
       "StepFunctionArgs.txt");

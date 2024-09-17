@@ -96,7 +96,6 @@ public class ScenarioWriter implements ScenarioWriterIF {
         .append(SCENARIO)
         .append(WS)
         .append(headerTerm.getScenarioName())
-        .append(SEMI)
         .append(System.lineSeparator())
         .append(System.lineSeparator());
   }
@@ -112,7 +111,6 @@ public class ScenarioWriter implements ScenarioWriterIF {
         .append(WS)
         .append(avallaLoadTerm.getLoad())
         .append(ASM_EXTENSION)
-        .append(SEMI)
         .append(System.lineSeparator())
         .append(System.lineSeparator());
   }
@@ -142,7 +140,6 @@ public class ScenarioWriter implements ScenarioWriterIF {
     this.stringBuilder
         .append(System.lineSeparator())
         .append(STEP)
-        .append(SEMI)
         .append(System.lineSeparator())
         .append(System.lineSeparator());
   }

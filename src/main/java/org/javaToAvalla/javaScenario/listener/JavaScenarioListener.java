@@ -107,20 +107,6 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
 
   /**
    * {@inheritDoc}
-   * <p>Processes the ASM declaration and adds header and load terms to the current scenario.</p>
-   *
-   * @param ctx the parse tree context.
-   */
-  @Override
-  public void enterAsmDeclaration(AsmDeclarationContext ctx) {
-    log.debug("Entering start_test_scenario_asmDeclaration: {} .", ctx.getText());
-    String asmName = ctx.ASMID(0).getText();
-    this.scenarioManagerIF.setHeaderTerm(this.currenteScenario, asmName, this.scenarioIndex);
-    this.scenarioManagerIF.setLoadTerm(this.currenteScenario, asmName);
-  }
-
-  /**
-   * {@inheritDoc}
    * <p>Initializes the variable map and creates a new scenario object.</p>
    *
    * @param ctx the parse tree context.
@@ -131,6 +117,21 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
     log.info("Found a scenario, creating a new Scenario Object.");
     this.variablesList = new HashMap<>();
     this.currenteScenario = new Scenario();
+  }
+
+  /**
+   * {@inheritDoc}
+   * <p>Processes the ASM declaration and adds header and load terms to the current scenario.</p>
+   *
+   * @param ctx the parse tree context.
+   */
+  @Override
+  public void enterAsmDeclaration(AsmDeclarationContext ctx) {
+    log.debug("Entering start_test_scenario_asmDeclaration: {} .", ctx.getText());
+    String text = ctx.ASMID(0).getText();
+    String asmName = text.substring(0,1).toUpperCase().concat(text.substring(1));
+    this.scenarioManagerIF.setHeaderTerm(this.currenteScenario, asmName, this.scenarioIndex);
+    this.scenarioManagerIF.setLoadTerm(this.currenteScenario, asmName);
   }
 
   /**
@@ -308,6 +309,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void exitScenario(ScenarioContext ctx) {
     this.scenarioList.add(this.currenteScenario);
+    this.scenarioIndex += 1;
     log.info("Scenario processing completed. Scenario added to the list.");
   }
 

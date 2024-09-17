@@ -98,7 +98,7 @@ public class ScenarioManager implements ScenarioManagerIF {
   private String retrieveValue(JavaVariableTerm javaVariable){
     String value = javaVariable.getValue();
     return javaVariable.isPrimitive() ?
-        value :
+        value.replaceAll("\"","") :
         value.substring(value.lastIndexOf('.')+1);
   }
 

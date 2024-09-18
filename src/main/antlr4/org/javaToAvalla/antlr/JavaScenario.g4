@@ -13,7 +13,7 @@ test
     ;
 
 scenario
-    :  (.)*? asmDeclaration (.)*? (variableDeclaration | stepFunction| assertEquals | ~RCURLY)* RCURLY
+    :  (asmDeclaration | variableDeclaration | stepFunction| assertEquals | ~RCURLY)* RCURLY
     ;
 
 asmDeclaration

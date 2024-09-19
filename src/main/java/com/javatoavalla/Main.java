@@ -107,7 +107,7 @@ public class Main {
 
     // clean option
     Option clean = Option.builder("clean")
-        .argName("<boolean>")
+        .argName("boolean")
         .type(String.class)
         .hasArg(true)
         .desc("Clean the input and the stepFunctionArgs files.")

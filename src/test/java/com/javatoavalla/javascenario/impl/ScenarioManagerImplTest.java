@@ -17,13 +17,13 @@ import com.javatoavalla.util.AssertionUtil;
 import com.javatoavalla.util.VariableUtil;
 import org.junit.Test;
 
-public class ScenarioManagerTest {
+public class ScenarioManagerImplTest {
 
   @Test
   public void whenSetHeaderTerm_HeaderTermIsCreatedAndAddedToQueue(){
-    ScenarioManager scenarioManager = new ScenarioManager();
+    ScenarioManagerImpl scenarioManagerImpl = new ScenarioManagerImpl();
     Scenario scenario = new Scenario();
-    scenarioManager.setHeaderTerm(scenario,"registroDiCassav3_ASM0",0);
+    scenarioManagerImpl.setHeaderTerm(scenario,"registroDiCassav3_ASM0",0);
 
     AvallaTerm avallaTerm = scenario.remove();
     assertTrue(avallaTerm instanceof AvallaHeaderTerm);
@@ -32,9 +32,9 @@ public class ScenarioManagerTest {
 
   @Test
   public void whenSetLoadTerm_HeaderTermIsCreatedAndAddedToQueue(){
-    ScenarioManager scenarioManager = new ScenarioManager();
+    ScenarioManagerImpl scenarioManagerImpl = new ScenarioManagerImpl();
     Scenario scenario = new Scenario();
-    scenarioManager.setLoadTerm(scenario,"registroDiCassav3_ASM0");
+    scenarioManagerImpl.setLoadTerm(scenario,"registroDiCassav3_ASM0");
 
     AvallaTerm avallaTerm = scenario.remove();
     assertTrue(avallaTerm instanceof AvallaLoadTerm);
@@ -44,9 +44,9 @@ public class ScenarioManagerTest {
   @Test
   public void whenSetSetTerm_SetTermIsCreatedAndAddedToQueue(){
     List<JavaVariableTerm> javaVariableList = VariableUtil.getVariableList();
-    ScenarioManager scenarioManager = new ScenarioManager();
+    ScenarioManagerImpl scenarioManagerImpl = new ScenarioManagerImpl();
     Scenario avallaScenario = new Scenario();
-    scenarioManager.setSetTerm(avallaScenario, javaVariableList);
+    scenarioManagerImpl.setSetTerm(avallaScenario, javaVariableList);
 
     assertFalse(avallaScenario.getScenario().isEmpty());
 
@@ -83,9 +83,9 @@ public class ScenarioManagerTest {
 
   @Test
   public void whenSetStepTerm_SetTermIsCreatedAndAddedToQueue(){
-    ScenarioManager scenarioManager = new ScenarioManager();
+    ScenarioManagerImpl scenarioManagerImpl = new ScenarioManagerImpl();
     Scenario avallaScenario = new Scenario();
-    scenarioManager.setStepTerm(avallaScenario);
+    scenarioManagerImpl.setStepTerm(avallaScenario);
 
     AvallaTerm avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaStepTerm);
@@ -93,11 +93,11 @@ public class ScenarioManagerTest {
 
   @Test
   public void whenSetCheckTerm_CheckTermIsCreatedAndAddedToQueue(){
-    ScenarioManager scenarioManager = new ScenarioManager();
+    ScenarioManagerImpl scenarioManagerImpl = new ScenarioManagerImpl();
     Scenario avallaScenario = new Scenario();
-    scenarioManager.setCheckTerm(avallaScenario, AssertionUtil.getAssertion0());
-    scenarioManager.setCheckTerm(avallaScenario, AssertionUtil.getAssertion1());
-    scenarioManager.setCheckTerm(avallaScenario, AssertionUtil.getAssertion2());
+    scenarioManagerImpl.setCheckTerm(avallaScenario, AssertionUtil.getAssertion0());
+    scenarioManagerImpl.setCheckTerm(avallaScenario, AssertionUtil.getAssertion1());
+    scenarioManagerImpl.setCheckTerm(avallaScenario, AssertionUtil.getAssertion2());
 
     AvallaTerm avallaTerm = avallaScenario.remove();
     assertTrue(avallaTerm instanceof AvallaCheckTerm);

@@ -7,7 +7,7 @@ import com.javatoavalla.model.ScenarioFile;
  * The {@code ScenarioWriterIF} interface defines the contract for writing a {@link Scenario}
  * object into a {@link ScenarioFile}.
  */
-public interface ScenarioWriterIF {
+public interface ScenarioWriter {
 
   /**
    * Converts a given {@link Scenario} object into a {@link ScenarioFile}.

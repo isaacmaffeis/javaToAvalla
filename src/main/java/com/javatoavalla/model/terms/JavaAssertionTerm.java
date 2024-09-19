@@ -1,24 +1,29 @@
 package com.javatoavalla.model.terms;
 
 /**
- * Represents a Java assertion term used to compare an actual value with an expected value in the Java context.
+ * Represents a Java assertion term used to compare an actual value with an expected value in the
+ * Java context.
  * <p>
- * This class is part of the Java-specific term hierarchy and is used to define assertions where
- * an actual result is compared to an expected result. It provides methods to retrieve and set
- * both the actual and expected values.
+ * This class is part of the Java-specific term hierarchy and is used to define assertions where an
+ * actual result is compared to an expected result. It provides methods to retrieve and set both the
+ * actual and expected values.
  * </p>
  */
 public class JavaAssertionTerm extends JavaTerm {
 
-  /** The actual value to be compared in the assertion. */
+  /**
+   * The actual value to be compared in the assertion.
+   */
   private String actual;
 
-  /** The expected value to compare against the actual value in the assertion. */
+  /**
+   * The expected value to compare against the actual value in the assertion.
+   */
   private String expected;
 
   /**
-   * Default constructor for the {@code JavaAssertionTerm} class.
-   * Initializes an empty assertion term without specifying the actual or expected values.
+   * Default constructor for the {@code JavaAssertionTerm} class. Initializes an empty assertion
+   * term without specifying the actual or expected values.
    */
   public JavaAssertionTerm() {
   }

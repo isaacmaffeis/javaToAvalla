@@ -24,8 +24,8 @@ import com.javatoavalla.antlr.JavaScenarioParser.VariableDeclarationContext;
 import com.javatoavalla.antlr.JavaScenarioParser.VariableNameContext;
 import com.javatoavalla.antlr.JavaScenarioParser.VariableTypeContext;
 import com.javatoavalla.antlr.JavaScenarioParser.VariableValueContext;
-import com.javatoavalla.javascenario.ScenarioManagerIF;
-import com.javatoavalla.javascenario.impl.ScenarioManager;
+import com.javatoavalla.javascenario.ScenarioManager;
+import com.javatoavalla.javascenario.impl.ScenarioManagerImpl;
 
 
 public class JavaScenarioListener extends JavaScenarioBaseListener {
@@ -55,7 +55,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   /**
    * The Scenario Manager interface to manage and transform scenario terms.
    */
-  private final ScenarioManagerIF scenarioManagerIF;
+  private final ScenarioManager scenarioManager;
 
   /**
    * The current scenario index.
@@ -89,7 +89,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
    */
   public JavaScenarioListener(List<JavaArgumentTerm> stepFunctionArgsList) {
     this.stepFunctionArgsList = stepFunctionArgsList;
-    this.scenarioManagerIF = new ScenarioManager();
+    this.scenarioManager = new ScenarioManagerImpl();
     this.scenarioList = new LinkedList<>();
   }
 
@@ -131,8 +131,8 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
     log.debug("Entering start_test_scenario_asmDeclaration: {} .", ctx.getText());
     String text = ctx.ASMID(0).getText();
     String asmName = text.substring(0,1).toUpperCase().concat(text.substring(1));
-    this.scenarioManagerIF.setHeaderTerm(this.currenteScenario, asmName, this.scenarioIndex);
-    this.scenarioManagerIF.setLoadTerm(this.currenteScenario, asmName);
+    this.scenarioManager.setHeaderTerm(this.currenteScenario, asmName, this.scenarioIndex);
+    this.scenarioManager.setLoadTerm(this.currenteScenario, asmName);
   }
 
   /**
@@ -248,8 +248,8 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void exitStepFunction(StepFunctionContext ctx) {
     log.debug("Exiting start_test_scenario_stepFunction: {} .", ctx.getText());
-    this.scenarioManagerIF.setSetTerm(this.currenteScenario,this.currentVariablesList);
-    this.scenarioManagerIF.setStepTerm(this.currenteScenario);
+    this.scenarioManager.setSetTerm(this.currenteScenario,this.currentVariablesList);
+    this.scenarioManager.setStepTerm(this.currenteScenario);
   }
 
   /**
@@ -298,7 +298,7 @@ public class JavaScenarioListener extends JavaScenarioBaseListener {
   @Override
   public void exitAssertEquals(AssertEqualsContext ctx) {
     log.debug("Exiting start_test_scenario_assertEquals: {} . Setting AvallaCheckTerm:", ctx.getText());
-    this.scenarioManagerIF.setCheckTerm(this.currenteScenario,this.currentJavaAssertionTerm);
+    this.scenarioManager.setCheckTerm(this.currenteScenario,this.currentJavaAssertionTerm);
   }
 
   /**

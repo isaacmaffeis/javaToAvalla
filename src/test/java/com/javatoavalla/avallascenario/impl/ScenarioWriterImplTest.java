@@ -7,15 +7,15 @@ import com.javatoavalla.model.ScenarioFile;
 import com.javatoavalla.util.ScenarioAvallaUtil;
 import org.junit.Test;
 
-public class ScenarioWriterTest {
+public class ScenarioWriterImplTest {
 
   @Test
   public void whenWriteScenario_thenScenarioFileIsCreated(){
 
     Scenario scenario = ScenarioAvallaUtil.getScenarioAvalla();
 
-    ScenarioWriter scenarioWriter = new ScenarioWriter();
-    ScenarioFile scenarioFile = scenarioWriter.write(scenario);
+    ScenarioWriterImpl scenarioWriterImpl = new ScenarioWriterImpl();
+    ScenarioFile scenarioFile = scenarioWriterImpl.write(scenario);
 
     assertEquals(scenarioFile.getText(),ScenarioAvallaUtil.getAvallaScenario());
     assertEquals(scenarioFile.getName(),ScenarioAvallaUtil.avallaHeaderTerm().getScenarioName());

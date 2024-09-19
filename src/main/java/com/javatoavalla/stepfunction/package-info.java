@@ -6,7 +6,7 @@
  * <ul>
  *   <li>{@link com.javatoavalla.stepfunction.StepFunctionArgsListener} - A listener that processes
  *   and collects argument terms used in step functions.</li>
- *   <li>{@link com.javatoavalla.stepfunction.StepFunctionReaderIF} - An interface that defines
+ *   <li>{@link com.javatoavalla.stepfunction.StepFunctionReader} - An interface that defines
  *   the contract for reading and parsing step function definitions from a file. </li>
  * </ul>
  */

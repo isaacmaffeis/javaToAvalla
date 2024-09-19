@@ -8,7 +8,7 @@ import com.javatoavalla.model.terms.JavaArgumentTerm;
  * The {@code StepFunctionReaderIF} interface defines the contract for reading and parsing step
  * function definitions from a file.
  */
-public interface StepFunctionReaderIF {
+public interface StepFunctionReader {
 
   /**
    * Reads a step function definition from the file at the specified {@code path}

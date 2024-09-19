@@ -6,10 +6,10 @@ import com.javatoavalla.model.Scenario;
 import com.javatoavalla.model.terms.JavaArgumentTerm;
 
 /**
- * The {@code ScenarioReaderIF} interface defines the contract for reading and parsing
+ * The {@code ScenarioReader} interface defines the contract for reading and parsing
  * Java scenario files.
  */
-public interface ScenarioReaderIF {
+public interface ScenarioReader {
 
   /**
    * Reads a java scenario from the file at the specified {@code path}

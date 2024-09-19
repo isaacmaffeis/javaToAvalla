@@ -1,15 +1,15 @@
 package com.javatoavalla.avallascenario;
 
-import java.util.List;
 import com.javatoavalla.model.Scenario;
 import com.javatoavalla.model.ScenarioFile;
+import java.util.List;
 
 
 /**
- * The {@code ScenarioListMapperIF} interface defines a contract for mapping a list of
+ * The {@code ScenarioListMapper} interface defines a contract for mapping a list of
  * {@link Scenario} objects to a list of {@link ScenarioFile} objects.
  */
-public interface ScenarioListMapperIF {
+public interface ScenarioListMapper {
 
   /**
    * Maps a list of {@link Scenario} objects to a list of {@link ScenarioFile} objects.

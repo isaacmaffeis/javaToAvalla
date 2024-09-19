@@ -1,9 +1,6 @@
 package com.javatoavalla.avallascenario.impl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import com.javatoavalla.avallascenario.ScenarioWriterIF;
-import com.javatoavalla.filewriter.impl.FileWriter;
+import com.javatoavalla.avallascenario.ScenarioWriter;
 import com.javatoavalla.model.Scenario;
 import com.javatoavalla.model.ScenarioFile;
 import com.javatoavalla.model.terms.AvallaCheckTerm;
@@ -12,51 +9,53 @@ import com.javatoavalla.model.terms.AvallaLoadTerm;
 import com.javatoavalla.model.terms.AvallaSetTerm;
 import com.javatoavalla.model.terms.AvallaStepTerm;
 import com.javatoavalla.model.terms.AvallaTerm;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
- * The {@code ScenarioWriter} class is responsible for converting a {@link Scenario}
- * object into a textual format and returning it as a {@link ScenarioFile}.
- * It processes each {@link AvallaTerm} in the {@link Scenario} to generate the appropriate text,
- * including headers, loads, sets, steps, and checks.
+ * The {@code ScenarioWriterImpl} class is responsible for converting a {@link Scenario} object into
+ * a textual format and returning it as a {@link ScenarioFile}. It processes each {@link AvallaTerm}
+ * in the {@link Scenario} to generate the appropriate text, including headers, loads, sets, steps,
+ * and checks.
  */
-public class ScenarioWriter implements ScenarioWriterIF {
+public class ScenarioWriterImpl implements ScenarioWriter {
 
-  private static final Logger log = LogManager.getLogger(ScenarioWriter.class);
+  private static final Logger log = LogManager.getLogger(ScenarioWriterImpl.class);
 
-  private final char EQ = '=';
+  private static final char EQ = '=';
 
-  private final char SEMI = ';';
+  private static final char SEMI = ';';
 
-  private final char WS = ' ';
+  private static final char WS = ' ';
 
-  private final String LET = ":=";
+  private static final String LET = ":=";
 
-  private final String ASM_EXTENSION = ".asm";
+  private static final String ASM_EXTENSION = ".asm";
 
-  private final String SCENARIO = "scenario";
+  private static final String SCENARIO = "scenario";
 
-  private final String LOAD = "load";
+  private static final String LOAD = "load";
 
-  private final String SET = "set";
+  private static final String SET = "set";
 
-  private final String STEP = "step";
+  private static final String STEP = "step";
 
-  private final String CHECK = "check";
+  private static final String CHECK = "check";
 
   private StringBuilder stringBuilder;
 
   /**
    * Default constructor.
    */
-  public ScenarioWriter() {
+  public ScenarioWriterImpl() {
   }
 
   /**
    * {@inheritDoc}
    *
    * <p>
-   * It iterates over the terms in the scenario and generates the appropriate textual
-   * representation based on the type of {@link AvallaTerm}.
+   * It iterates over the terms in the scenario and generates the appropriate textual representation
+   * based on the type of {@link AvallaTerm}.
    * </p>
    */
   @Override
@@ -65,9 +64,9 @@ public class ScenarioWriter implements ScenarioWriterIF {
     this.stringBuilder = new StringBuilder();
     ScenarioFile scenarioFile = new ScenarioFile();
 
-    for(AvallaTerm avallaTerm : scenario.getScenario()){
-      log.debug("Writing the term: {}",avallaTerm.getClass());
-      if(avallaTerm instanceof AvallaHeaderTerm) {
+    for (AvallaTerm avallaTerm : scenario.getScenario()) {
+      log.debug("Writing the term: {}", avallaTerm.getClass());
+      if (avallaTerm instanceof AvallaHeaderTerm) {
         writeHeader((AvallaHeaderTerm) avallaTerm);
         scenarioFile.setName(((AvallaHeaderTerm) avallaTerm).getScenarioName());
       } else if (avallaTerm instanceof AvallaLoadTerm) {
@@ -105,7 +104,7 @@ public class ScenarioWriter implements ScenarioWriterIF {
    *
    * @param avallaLoadTerm the {@link AvallaLoadTerm} containing the load information.
    */
-  private void writeLoad(AvallaLoadTerm avallaLoadTerm){
+  private void writeLoad(AvallaLoadTerm avallaLoadTerm) {
     this.stringBuilder
         .append(LOAD)
         .append(WS)

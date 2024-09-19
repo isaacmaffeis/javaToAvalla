@@ -5,7 +5,7 @@
  * which extends {@code JavaScenarioBaseListener} and listens for events
  * in a scenario description. It processes variable declarations, step functions, and assertions,
  * and converts them
- * into executable terms managed by {@link com.javatoavalla.javascenario.ScenarioManagerIF}.
+ * into executable terms managed by {@link com.javatoavalla.javascenario.ScenarioManager}.
  * </p>
  */
 

@@ -1,14 +1,16 @@
 package com.javatoavalla.model;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import com.javatoavalla.model.terms.AvallaStepTerm;
 import com.javatoavalla.model.terms.AvallaTerm;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
- * The {@code Scenario} class represents a scenario that consists of a queue of {@link AvallaTerm} objects.
+ * The {@code Scenario} class represents a scenario that consists of a queue of {@link AvallaTerm}
+ * objects.
  *
- * <p>This class manages the sequence of terms used in a scenario and tracks whether the scenario is valid
+ * <p>This class manages the sequence of terms used in a scenario and tracks whether the scenario is
+ * valid
  * based on the inclusion of at least one {@link AvallaStepTerm}.
  * </p>
  *
@@ -19,10 +21,15 @@ import com.javatoavalla.model.terms.AvallaTerm;
  */
 public class Scenario {
 
-  /** A queue of {@link AvallaTerm} objects representing the scenario. */
-  private Queue<AvallaTerm> scenario;
+  /**
+   * A queue of {@link AvallaTerm} objects representing the scenario.
+   */
+  private final Queue<AvallaTerm> scenario;
 
-  /** Flag indicating whether the scenario contains at least one {@link AvallaStepTerm}, making it valid. */
+  /**
+   * Flag indicating whether the scenario contains at least one {@link AvallaStepTerm}, making it
+   * valid.
+   */
   private boolean valid;
 
   /**

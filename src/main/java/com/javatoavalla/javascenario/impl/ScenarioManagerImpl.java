@@ -1,31 +1,31 @@
 package com.javatoavalla.javascenario.impl;
 
-import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import com.javatoavalla.javascenario.ScenarioManagerIF;
+import com.javatoavalla.javascenario.ScenarioManager;
+import com.javatoavalla.model.Scenario;
 import com.javatoavalla.model.terms.AvallaCheckTerm;
 import com.javatoavalla.model.terms.AvallaHeaderTerm;
 import com.javatoavalla.model.terms.AvallaLoadTerm;
-import com.javatoavalla.model.Scenario;
 import com.javatoavalla.model.terms.AvallaSetTerm;
 import com.javatoavalla.model.terms.AvallaStepTerm;
 import com.javatoavalla.model.terms.JavaAssertionTerm;
 import com.javatoavalla.model.terms.JavaVariableTerm;
+import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
- * The {@code ScenarioManager} class implements the {@link ScenarioManagerIF} interface.
- * It manages the addition of various terms (header, load, set, step, and check) to the
- * Avalla scenario.
+ * The {@code ScenarioManagerImpl} class implements the {@link ScenarioManager} interface. It
+ * manages the addition of various terms (header, load, set, step, and check) to the Avalla
+ * scenario.
  */
-public class ScenarioManager implements ScenarioManagerIF {
+public class ScenarioManagerImpl implements ScenarioManager {
 
-  private static final Logger log = LogManager.getLogger(ScenarioManager.class);
+  private static final Logger log = LogManager.getLogger(ScenarioManagerImpl.class);
 
   /**
-   * Default constructor for the {@code ScenarioManager} class.
+   * Default constructor for the {@code ScenarioManagerImpl} class.
    */
-  public ScenarioManager() {
+  public ScenarioManagerImpl() {
   }
 
   /**
@@ -35,7 +35,7 @@ public class ScenarioManager implements ScenarioManagerIF {
   public void setHeaderTerm(Scenario avallaScenario, String asmName, int scenarioIndex) {
     AvallaHeaderTerm avallaHeaderTerm = new AvallaHeaderTerm();
     avallaHeaderTerm.setScenarioName(retrieveAsmName(asmName) + "_scenario" + scenarioIndex);
-    log.debug("Set AvallaHeaderTerm_name: {} .",avallaHeaderTerm.getScenarioName());
+    log.debug("Set AvallaHeaderTerm_name: {} .", avallaHeaderTerm.getScenarioName());
     avallaScenario.add(avallaHeaderTerm);
   }
 
@@ -46,7 +46,7 @@ public class ScenarioManager implements ScenarioManagerIF {
   public void setLoadTerm(Scenario avallaScenario, String asmName) {
     AvallaLoadTerm avallaLoadTerm = new AvallaLoadTerm();
     avallaLoadTerm.setLoad(retrieveAsmName(asmName));
-    log.debug("Set AvallaLoadTerm_load: {} .",avallaLoadTerm.getLoad());
+    log.debug("Set AvallaLoadTerm_load: {} .", avallaLoadTerm.getLoad());
     avallaScenario.add(avallaLoadTerm);
   }
 
@@ -55,12 +55,12 @@ public class ScenarioManager implements ScenarioManagerIF {
    */
   @Override
   public void setSetTerm(Scenario avallaScenario, List<JavaVariableTerm> variablesList) {
-    for(JavaVariableTerm javaVariable : variablesList){
+    for (JavaVariableTerm javaVariable : variablesList) {
       AvallaSetTerm avallaSetTerm = new AvallaSetTerm();
       avallaSetTerm.setName(javaVariable.getName());
-      log.debug("Set AvallaSetTerm_name: {} .",avallaSetTerm.getName());
+      log.debug("Set AvallaSetTerm_name: {} .", avallaSetTerm.getName());
       avallaSetTerm.setValue(retrieveValue(javaVariable));
-      log.debug("Set AvallaSetTerm_value: {} .",avallaSetTerm.getValue());
+      log.debug("Set AvallaSetTerm_value: {} .", avallaSetTerm.getValue());
       avallaScenario.add(avallaSetTerm);
     }
   }
@@ -82,9 +82,9 @@ public class ScenarioManager implements ScenarioManagerIF {
   public void setCheckTerm(Scenario avallaScenario, JavaAssertionTerm javaAssertionTerm) {
     AvallaCheckTerm avallaCheckTerm = new AvallaCheckTerm();
     avallaCheckTerm.setLeftTerm(retrieveExpected(javaAssertionTerm.getExpected()));
-    log.debug("Set AvallaCheckTerm_leftTerm: {} .",avallaCheckTerm.getLeftTerm());
+    log.debug("Set AvallaCheckTerm_leftTerm: {} .", avallaCheckTerm.getLeftTerm());
     avallaCheckTerm.setRightTerm(retrieveActual(javaAssertionTerm.getActual()));
-    log.debug("Set AvallaCheckTerm_rightTerm: {} .",avallaCheckTerm.getRightTerm());
+    log.debug("Set AvallaCheckTerm_rightTerm: {} .", avallaCheckTerm.getRightTerm());
     avallaScenario.add(avallaCheckTerm);
   }
 
@@ -95,11 +95,11 @@ public class ScenarioManager implements ScenarioManagerIF {
    * @param javaVariable the variable whose value needs to be retrieved.
    * @return the processed value as a string.
    */
-  private String retrieveValue(JavaVariableTerm javaVariable){
+  private String retrieveValue(JavaVariableTerm javaVariable) {
     String value = javaVariable.getValue();
-    return javaVariable.isPrimitive() ?
-        value.replaceAll("\"","") :
-        value.substring(value.lastIndexOf('.')+1);
+    return javaVariable.isPrimitive()
+        ? value.replaceAll("\"", "")
+        : value.substring(value.lastIndexOf('.') + 1);
   }
 
   /**
@@ -108,8 +108,8 @@ public class ScenarioManager implements ScenarioManagerIF {
    * @param asmName the ASM name string.
    * @return the processed ASM name.
    */
-  private String retrieveAsmName(String asmName){
-    return asmName.substring(0,asmName.lastIndexOf("_ASM"));
+  private String retrieveAsmName(String asmName) {
+    return asmName.substring(0, asmName.lastIndexOf("_ASM"));
   }
 
   /**
@@ -118,8 +118,8 @@ public class ScenarioManager implements ScenarioManagerIF {
    * @param actual the actual value string.
    * @return the processed actual value.
    */
-  private String retrieveActual(String actual){
-    return actual.substring(actual.lastIndexOf(".")+1);
+  private String retrieveActual(String actual) {
+    return actual.substring(actual.lastIndexOf(".") + 1);
   }
 
   /**
@@ -128,9 +128,9 @@ public class ScenarioManager implements ScenarioManagerIF {
    * @param expected the expected value string.
    * @return the processed expected value.
    */
-  private String retrieveExpected(String expected){
+  private String retrieveExpected(String expected) {
     return expected.substring(
-        expected.lastIndexOf(".get_")+5).replaceAll("\\(\\)","");
+        expected.lastIndexOf(".get_") + 5).replaceAll("\\(\\)", "");
   }
 
 }

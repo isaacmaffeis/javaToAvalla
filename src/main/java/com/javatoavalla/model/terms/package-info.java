@@ -2,8 +2,7 @@
  * This package contains classes representing various terms used int the Java to AVALLA
  * translation process.
  *
- * <p>
- * Classes included in this package:
+ * <p>Classes included in this package:
  * <ul>
  *     <li>{@link com.javatoavalla.model.terms.Term} - Abstract base class for all term types.</li>
  *     <li>{@link com.javatoavalla.model.terms.JavaTerm} - Abstract class for Java-specific terms.

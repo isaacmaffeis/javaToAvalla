@@ -1,5 +1,16 @@
 package com.javatoavalla;
 
+import com.javatoavalla.avallascenario.ScenarioListMapper;
+import com.javatoavalla.avallascenario.impl.ScenarioListMapperImpl;
+import com.javatoavalla.filewriter.FileWriter;
+import com.javatoavalla.filewriter.impl.FileWriterImpl;
+import com.javatoavalla.javascenario.ScenarioReader;
+import com.javatoavalla.javascenario.impl.ScenarioReaderImpl;
+import com.javatoavalla.model.Scenario;
+import com.javatoavalla.model.ScenarioFile;
+import com.javatoavalla.model.terms.JavaArgumentTerm;
+import com.javatoavalla.stepfunction.StepFunctionReader;
+import com.javatoavalla.stepfunction.impl.StepFunctionReaderImpl;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,17 +26,6 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.javatoavalla.avallascenario.ScenarioListMapperIF;
-import com.javatoavalla.avallascenario.impl.ScenarioListMapper;
-import com.javatoavalla.filewriter.FileWriterIF;
-import com.javatoavalla.filewriter.impl.FileWriter;
-import com.javatoavalla.javascenario.ScenarioReaderIF;
-import com.javatoavalla.javascenario.impl.ScenarioReader;
-import com.javatoavalla.model.Scenario;
-import com.javatoavalla.model.ScenarioFile;
-import com.javatoavalla.model.terms.JavaArgumentTerm;
-import com.javatoavalla.stepfunction.StepFunctionReaderIF;
-import com.javatoavalla.stepfunction.impl.StepFunctionReader;
 
 /**
  * This is the main class of the application which serves as the entry point.
@@ -132,23 +132,23 @@ public class Main {
   private void runTheApplication(Path inputPath, Path stepFunctionArgsPath, Path outputPath) {
 
     log.info("Processing StepFunctionArgs...");
-    StepFunctionReaderIF stepFunctionReader = new StepFunctionReader();
+    StepFunctionReader stepFunctionReader = new StepFunctionReaderImpl();
     List<JavaArgumentTerm> javaArgumentTermList = stepFunctionArgsPath == null
         ? stepFunctionReader.readStepFunction()
         : stepFunctionReader.readStepFunction(stepFunctionArgsPath);
 
     log.info("Processing JavaScenario...");
-    ScenarioReaderIF scenarioReader = new ScenarioReader();
+    ScenarioReader scenarioReader = new ScenarioReaderImpl();
     List<Scenario> scenarioList = scenarioReader.readJavaScenario(inputPath,
         javaArgumentTermList);
 
     log.info("Mapping Scenario Files...");
-    ScenarioListMapperIF scenarioListMapper = new ScenarioListMapper();
+    ScenarioListMapper scenarioListMapper = new ScenarioListMapperImpl();
     List<ScenarioFile> scenarioFiles = scenarioListMapper.mapScenarioListToFileList(scenarioList);
 
     log.info("Exporting output Files...");
     for (ScenarioFile scenarioFile : scenarioFiles) {
-      FileWriterIF fileWriter = new FileWriter();
+      FileWriter fileWriter = new FileWriterImpl();
       boolean result = outputPath == null
           ? fileWriter.writeToFile(scenarioFile)
           : fileWriter.writeToFile(scenarioFile, outputPath);
@@ -213,7 +213,7 @@ public class Main {
       if (line.hasOption("stepFunctionArgsPath")) {
         clean(stepFunctionArgsPath);
       } else {
-        clean(StepFunctionReader.DEFAULT_PATH);
+        clean(StepFunctionReaderImpl.DEFAULT_PATH);
       }
     }
   }

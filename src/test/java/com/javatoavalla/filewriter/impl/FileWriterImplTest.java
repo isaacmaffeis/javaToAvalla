@@ -9,15 +9,15 @@ import com.javatoavalla.model.ScenarioFile;
 import com.javatoavalla.util.ScenarioAvallaUtil;
 import org.junit.Test;
 
-public class FileWriterTest {
+public class FileWriterImplTest {
 
   @Test
   public void writeToFileAndCheckThatFileIsCreated(){
 
-    FileWriter fileWriter = new FileWriter();
+    FileWriterImpl fileWriterImpl = new FileWriterImpl();
     ScenarioFile scenarioFile = ScenarioAvallaUtil.getScenarioFile();
 
-    boolean result = fileWriter.writeToFile(scenarioFile);
+    boolean result = fileWriterImpl.writeToFile(scenarioFile);
     assertTrue(result);
 
     Path outputFile = Paths.get(

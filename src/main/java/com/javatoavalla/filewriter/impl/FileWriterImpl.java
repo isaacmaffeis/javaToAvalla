@@ -1,5 +1,7 @@
 package com.javatoavalla.filewriter.impl;
 
+import com.javatoavalla.filewriter.FileWriter;
+import com.javatoavalla.model.ScenarioFile;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -7,29 +9,27 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.javatoavalla.filewriter.FileWriterIF;
-import com.javatoavalla.model.ScenarioFile;
 
 /**
- * The {@code FileWriter} class provides methods to write a {@link ScenarioFile}
- * to a specified output folder or a default folder in the project root directory.
- * It implements the {@link FileWriterIF} interface.
+ * The {@code FileWriterImpl} class provides methods to write a {@link ScenarioFile} to a specified
+ * output folder or a default folder in the project root directory. It implements the
+ * {@link FileWriter} interface.
  */
-public class FileWriter implements FileWriterIF {
+public class FileWriterImpl implements FileWriter {
 
-  private static final Logger log = LogManager.getLogger(FileWriter.class);
+  private static final Logger log = LogManager.getLogger(FileWriterImpl.class);
 
   /**
-   * The default output path where files will be written if no specific folder is provided.
-   * This is the "output" folder within the project root.
+   * The default output path where files will be written if no specific folder is provided. This is
+   * the "output" folder within the project root.
    */
-  private final Path DEFAULT_OUTPUT_PATH = Paths.get(
+  private static final Path DEFAULT_OUTPUT_PATH = Paths.get(
       System.getProperty("user.dir"), "output");
 
   /**
    * Constructs a {@code FileWriter} instance.
    */
-  public FileWriter() {
+  public FileWriterImpl() {
   }
 
   /**
@@ -49,8 +49,8 @@ public class FileWriter implements FileWriterIF {
   }
 
   /**
-   * Writes the given {@link ScenarioFile} to the specified output folder.
-   * Ensures that the folder exists and creates it if necessary.
+   * Writes the given {@link ScenarioFile} to the specified output folder. Ensures that the folder
+   * exists and creates it if necessary.
    *
    * @param scenarioFile The scenario file to be written.
    * @param outputFolder The folder where the file will be saved.
@@ -62,16 +62,16 @@ public class FileWriter implements FileWriterIF {
     log.info("Exporting: {} to the folder: {}", scenarioFile.getName(), outputFolder);
 
     if (!checkPath(outputFolder)) {
-        createPath(outputFolder);
+      createPath(outputFolder);
     }
 
     Path fullOutputPath = outputFolder.resolve(
         scenarioFile.getName() + scenarioFile.getExtension());
-    log.info("Output file path: {} .",fullOutputPath);
+    log.info("Output file path: {} .", fullOutputPath);
 
     boolean result = false;
     try {
-      log.info("Writing file to path: {} .",fullOutputPath);
+      log.info("Writing file to path: {} .", fullOutputPath);
       Files.write(fullOutputPath, scenarioFile.getText().getBytes(StandardCharsets.UTF_8));
       log.info("File writing operation completed with success.");
       result = true;
@@ -94,20 +94,20 @@ public class FileWriter implements FileWriterIF {
   }
 
   /**
-   * Creates a directory at the specified path if it does not exist.
-   * Prints a message if the directory is created or an error occurs.
+   * Creates a directory at the specified path if it does not exist. Prints a message if the
+   * directory is created or an error occurs.
    *
    * @param path The path where the directory should be created.
    */
   private void createPath(Path path) {
     try {
-      log.info("Path {} doesn't exist.",path);
-      log.info("Creating path {} ...",path);
+      log.info("Path {} doesn't exist.", path);
+      log.info("Creating path {} ...", path);
       Files.createDirectories(path);
-      log.info("Path {} created with success.",path);
-  } catch (IOException e) {
-    log.error("Failed to create path: {} .", path);
-    throw new RuntimeException("Failed to create path: " + path, e);
+      log.info("Path {} created with success.", path);
+    } catch (IOException e) {
+      log.error("Failed to create path: {} .", path);
+      throw new RuntimeException("Failed to create path: " + path, e);
     }
   }
 }

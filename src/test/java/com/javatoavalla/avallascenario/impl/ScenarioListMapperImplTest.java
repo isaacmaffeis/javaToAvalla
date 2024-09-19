@@ -11,7 +11,7 @@ import com.javatoavalla.model.ScenarioFile;
 import com.javatoavalla.util.ScenarioAvallaUtil;
 import org.junit.Test;
 
-public class ScenarioListMapperTest {
+public class ScenarioListMapperImplTest {
 
   @Test
   public void mapScenarioListAndCheckResults(){
@@ -24,10 +24,10 @@ public class ScenarioListMapperTest {
     scenarioList.add(scenario1);
     scenarioList.add(scenario2);
 
-    ScenarioListMapper scenarioListMapper = new ScenarioListMapper();
+    ScenarioListMapperImpl scenarioListMapperImpl = new ScenarioListMapperImpl();
 
     List<ScenarioFile> scenarioFileList =
-        scenarioListMapper.mapScenarioListToFileList(scenarioList);
+        scenarioListMapperImpl.mapScenarioListToFileList(scenarioList);
 
     assertFalse(scenarioFileList.isEmpty());
     assertEquals(scenarioFileList.size(),2);

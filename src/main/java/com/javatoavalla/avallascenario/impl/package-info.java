@@ -3,13 +3,13 @@
  * {@code avallaScenario} package.
  *
  * <p>The {@code ScenarioListMapper} class implements the
- * {@link org.javaToAvalla.avallaScenario.ScenarioListMapperIF} interface, providing
- * functionality to convert a list of {@link org.javaToAvalla.model.Scenario}
- * objects into a list of {@link org.javaToAvalla.model.ScenarioFile} objects.</p>
+ * {@link com.javatoavalla.avallascenario.ScenarioListMapper} interface, providing
+ * functionality to convert a list of {@link com.javatoavalla.model.Scenario}
+ * objects into a list of {@link com.javatoavalla.model.ScenarioFile} objects.</p>
  *
  * <p>The {@code ScenarioWriter} class implements the
- * {@link org.javaToAvalla.avallaScenario.ScenarioWriterIF} interface, providing the
- * ability to write a {@link org.javaToAvalla.model.Scenario} into a
- * {@link org.javaToAvalla.model.ScenarioFile}.</p>
+ * {@link com.javatoavalla.avallascenario.ScenarioWriter} interface, providing the
+ * ability to write a {@link com.javatoavalla.model.Scenario} into a
+ * {@link com.javatoavalla.model.ScenarioFile}.</p>
  */
-package org.javaToAvalla.avallaScenario.impl;
+package com.javatoavalla.avallascenario.impl;

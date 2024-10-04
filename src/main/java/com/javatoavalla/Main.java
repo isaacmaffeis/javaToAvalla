@@ -40,11 +40,19 @@ public class Main {
    * @param args An array of {@code String} arguments passed from the command line.
    */
   public static void main(String[] args) {
+
+    String asciiart = "\n   _                 _____       _             _ _       \n"
+        + "  (_) __ ___   ____ |_   _|__   / \\__   ____ _| | | __ _ \n"
+        + "  | |/ _` \\ \\ / / _` || |/ _ \\ / _ \\ \\ / / _` | | |/ _` |\n"
+        + "  | | (_| |\\ V / (_| || | (_) / ___ \\ V / (_| | | | (_| |\n"
+        + " _/ |\\__,_| \\_/ \\__,_||_|\\___/_/   \\_\\_/ \\__,_|_|_|\\__,_|\n"
+        + "|__/                                                     ";
+
     try {
       Main main = new Main();
       Options options = getCommandLineOptions();
       CommandLine line = main.parseCommandLine(args, options);
-      log.info("Performing requested operation ...");
+      log.info(asciiart);
       if (line == null || line.hasOption("help") || line.getOptions().length == 0) {
         HelpFormatter formatter = new HelpFormatter();
         // Do not sort
